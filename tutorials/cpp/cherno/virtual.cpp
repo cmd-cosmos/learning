@@ -42,7 +42,7 @@ int main()
 
     // reason why method executing is the one inside the Entity class?
     // when func called ---> primary type based output given.
-    // will go into the method definition for the type that was passed as an argument. Entuty in our case.
+    // will go into the method definition for the type that was passed as an argument. Entity in our case.
     // virtual functions help cpp know what type of entity is calling the function so as to provide appropriate behavior based on entity type.
     // virtual functions ---> introduce dynamic dispatch which implements the v-table, contains a mapping of the virtual functions in the base class so that we can map it to the correct overwritten function in a subclass.
 
