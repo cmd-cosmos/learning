@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <array>    // cpp 11 std array
 
 void Log(auto input)
 {
@@ -62,6 +62,10 @@ int main()
     Entity e;
 
     static const int size_arr = 5; // correct way to track size of an array in terms of number of elements it can hold.
+
+    // using the std array from cpp 11
+    std::array<int, 5> arr11;
+    std::cout << "size for the std arr from cpp 11: " << arr11.size() << '\n';
 
     return 0;
 }
