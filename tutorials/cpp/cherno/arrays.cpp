@@ -6,6 +6,19 @@ void Log(auto input)
     std::cout << input << '\n';
 };
 
+class Entity
+{
+public:
+    int sample[5];
+    Entity()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            sample[i] = 0;
+        }
+    }
+};
+
 int main()
 {
     int array[5];
@@ -40,6 +53,15 @@ int main()
     // reason why we have to add 4 annd not 4x4 =16 bytes is beacause it internally knwos the type of the ptr which is int, but if we were using a char pointer for modifying an int arr then we would need to multiply it by  4
     *(int*)((char*)ptr + (8)) = 70; // deref the 2nd idx and assign the val of 70
     Log(*(sample+2)); // should print 70
+
+    // creating an array on the heap
+    int* heap_arr = new int[5];
+    // the heap_arr will have a different lifetime in comparision to the arrays on stack seen before.
+    delete[] heap_arr; // delete using the array operator. 
+
+    Entity e;
+
+    static const int size_arr = 5; // correct way to track size of an array in terms of number of elements it can hold.
 
     return 0;
 }
