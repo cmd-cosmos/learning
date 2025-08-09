@@ -3,6 +3,19 @@
 
 // chars ---> 1 byte in cpp but different encodings permit for differnet sizes like UTF16 = 2 byte char size
 
+void badString(std::string string) // this will create a copy instead of affecting the actual string ---> no mods can be performed on the srgument string when this method of pass by value used.
+// read only function
+{
+    std::cout << string << '\n';
+}
+
+void goodFunction(const std::string& string_ref) // pass by reference method to pass the pointer to the original string.
+// avoids expensive operation of string copy.
+// provides write access to the original string.
+{
+    // since we use const we will not mutate the string but we could now since we have the reference to the string.
+}
+
 int main()
 {
     // C style string definition
