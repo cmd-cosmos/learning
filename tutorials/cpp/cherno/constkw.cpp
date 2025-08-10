@@ -3,8 +3,46 @@
 #include <iostream>
 #include <string>
 
+class Entity
+// mark methods as const if they are not supposed to modify the class.
+// if we want a variable to be modified in a const method ---> mark as mutable ---> use mutable keyword.
+{
+private:
+    int m_X, m_Y;
+    int* ptr;
+    mutable int mut_A;
+public:
+    // const should be used with getters but not with setters.
+    int GetX() const // after method name ---> works only in classes ---> prevents write on any class attribute passed to the method.
+    {
+        // m_X = 100; // does not allow this write as the method is bound to be const.
+        
+        mut_A += 1000; // since mut_A has the mutable keyword associated ---> it allows for mutation even within the const method.
+
+        return m_X;
+    }
+    // not a const method.
+    int SetX()
+    {
+        m_X += 1000;
+    }
+    const int* const GetPtr() const
+    {
+        return ptr;
+    }
+};
+
+void PrintEntity(const Entity& e) // passing a constant reference
+{
+    //modify ptr behavior but cannot modify class behavior as pointer contents are set to read only.
+    
+    // e = Entity(); // error as e is read only due to it being passed as a const ref
+}
+
 int main()
 {
+    Entity e;
+
     int x = 5;
     const int MAX_THRUST = 100;
 
@@ -32,8 +70,7 @@ int main()
     
     //crux: 
     //const before the pointer astricks ensures that the value pointed to by the pointer is immutable. ---> const int* a or int const* ---> 
-    // const after the astericks ensures that the pointer itself cannot be reassigned to a different mem location. ---> int* const a ---> the integer pointer must point to a constant mem location
+    // const after the astericks ensures that the pointer itself cannot be reassigned to a different mem location. ---> int* const a ---> read as: the integer pointer must point to a constant mem location
     
-
     return 0;
 }
