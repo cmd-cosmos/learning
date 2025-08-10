@@ -71,6 +71,24 @@ int main()
     //crux: 
     //const before the pointer astricks ensures that the value pointed to by the pointer is immutable. ---> const int* a or int const* ---> 
     // const after the astericks ensures that the pointer itself cannot be reassigned to a different mem location. ---> int* const a ---> read as: the integer pointer must point to a constant mem location
+
+    int OtherVar = 1;
+    int var = 10;
+    const int* mod = &var; // mod is a pointer to a constant integer in terms of pointer deref
+    // *mod = 1000; ---> error as from the perspective of the pointer the value pointed to is read only
+
+    // var itself is not constant and can be modified by using other means but the pointer only has read access to that mem location ---> the location itself is not holding a const int.
+    var += 6; // var itself is not const ---> pointer is not allowed to modify it.
+
+    mod = &OtherVar; // legal ---> the pointer itself can reorioent to point to other var
+    // *OtherVar = 900; // same error as before ---> other var cannot be modified through the pointer.
+
+    int OtherTestVar = 180;
+    int TestVar = 9999;
+    int* const TestPtr = &TestVar;
+
+    *TestPtr = 0; // the pointer can now modify the value but..
+    // TestPtr = & OtherTestVar; // this is not allowed ---> the pointer itself can only point to 1 location and cannot be reoriented.
     
     return 0;
 }
