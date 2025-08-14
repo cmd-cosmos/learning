@@ -30,6 +30,19 @@ int main()
     Entity stk_e("Batman"); // this is the parametrized constructor
     std::cout << stk_e.GetName() << '\n';
 
+    // creating objects of the same class on the heap
+    // heap allocation
+    Entity* e_heap;
+    {
+        // different scope
+        Entity* ent_heap = new Entity("Joker");
+        e_heap = ent_heap;
+        std::cout << e_heap->GetName() << '\n';
+    }
+    // even at this point the name variable assigned to the ent_heap is preserved
+    // memory is cleared only when the delete method is called, thus ensuring a longer lifespan.
+
+    delete e_heap;
     
     return 0;
 }
