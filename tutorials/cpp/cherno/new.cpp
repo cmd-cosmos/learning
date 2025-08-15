@@ -35,7 +35,7 @@ int main()
     int* b = new int; // 4bytes of heap mem --> since new returns a ptr we declare b as a ptr 
     int* c = new int[50]; // 200 bytes allocated starting from address of c
 
-    // all 50 entities will be in a row
+    // all 10 entities will be in a row
     Entity* e = new Entity[10]; // returns space for 10 entity objects
 
     // deleting is essential once memory not needed
