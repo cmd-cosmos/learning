@@ -31,6 +31,12 @@ struct Vector2
     {
         return multiply(other);
     }
+
+    bool operator==(const Vector2& other) const
+    {
+        // checking if 2 vectors are equal in magnitude
+        return x == other.x && y == other.y;
+    }
 };
 
 std::ostream& operator<<(std::ostream& stream, const Vector2& other)
@@ -61,7 +67,11 @@ int main()
     // << ---> takes in an output stream and outputs other primitive objects
     // if we want to output the Vector2 obj using this operator we must overload it.
     Vector2 result4 = position + speed;
-    std::cout << result4; // now this works as << is overloaded to include custom objects in the regular ostream.
+    std::cout << result4 << '\n'; // now this works as << is overloaded to include custom objects in the regular ostream.
+
+    // == ---> overloading comparator
+    std::cout << (result == result3) << std::endl; // false
+    std::cout << (result == result2) << std::endl; // true
 
     return 0;
 }
