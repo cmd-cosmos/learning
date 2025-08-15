@@ -23,7 +23,7 @@ int main()
 {
     Entity a("Batman");
     Entity b(22); // this must be done
-    Entity b = 22; // not allowed anymore
+    // Entity b = 22; // not allowed anymore
 
     // this is also not allowed since explicit kw used with the age parametrized constructor.
                             // Entity c = 30; 
