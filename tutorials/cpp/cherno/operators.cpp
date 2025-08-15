@@ -37,6 +37,13 @@ struct Vector2
         // checking if 2 vectors are equal in magnitude
         return x == other.x && y == other.y;
     }
+
+        bool operator!=(const Vector2& other) const
+    {
+        // checking if 2 vectors are equal in magnitude
+        return x != other.x || y != other.y;
+        // return !(*this == other);
+    }
 };
 
 std::ostream& operator<<(std::ostream& stream, const Vector2& other)
@@ -72,6 +79,9 @@ int main()
     // == ---> overloading comparator
     std::cout << (result == result3) << std::endl; // false
     std::cout << (result == result2) << std::endl; // true
+
+    std::cout << (result != result3) << std::endl; // true
+
 
     return 0;
 }
