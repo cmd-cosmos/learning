@@ -1,6 +1,6 @@
 //this keyword ---> only accessible through a member function
 // we can reference 'this' inside a method
-// this ---> is a ptr to a currect object instance that the method belongs to.
+// this ---> is a ptr to a current object instance that the method belongs to.
 
 #include <iostream>
 #include <string>
