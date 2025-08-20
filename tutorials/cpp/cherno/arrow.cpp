@@ -36,6 +36,12 @@ class ScopedPtr
 
 };
 
+struct Vector3
+{
+    float x,y,z;
+};
+
+
 int main()
 {
     Entity e;
