@@ -36,6 +36,7 @@ class ScopedPtr
 
 };
 
+// demo: using -> to get offset of member variable in memory
 struct Vector3
 {
     float x,y,z;
@@ -58,6 +59,15 @@ int main()
     ScopedPtr scptr = new Entity();
     scptr->Print(); // we can access obj mem funcs using the scope ptr that will ensure deletion of the object as soon as scope exited
 
+    // offset of member vars from start of mem block assigned to structs
+    int offset = (int)&((Vector3*)nullptr)->x;
+    std::cout << offset << std::endl;
+    
+    int offset2 = (int)&((Vector3*)nullptr)->y;
+    std::cout << offset2 << std::endl;
+
+    int offset3 = (int)&((Vector3*)nullptr)->z;
+    std::cout << offset3 << std::endl;
     return 0;
 }
 
