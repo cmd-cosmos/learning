@@ -42,5 +42,8 @@ int main()
     }
 
     vertices.clear(); // sets array size  back to 0 ---> remove all elements at once.
+
+    vertices.erase(vertices.begin() + 2);
+
     return 0;
 }
