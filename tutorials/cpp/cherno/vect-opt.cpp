@@ -17,9 +17,11 @@ struct Vertex
     // copy constructor
     Vertex(const Vertex& vertex) : x(vertex.x), y(vertex.y), z(vertex.z)
     {
+        static int i = 0;
         std::cout << "Copied" << std::endl;
+        i++;
+        std::cout << "Count: " << i << std::endl;
     }
-
 
 };
 
