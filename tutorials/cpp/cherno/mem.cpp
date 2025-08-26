@@ -3,10 +3,16 @@
 // stack and heap are 2 areas in the RAM
 // stack ---> fixed area usually 2 MB
 // heap ----> predefined but can grow as the app exe.
-// both are stored in the RAM, however the stack is usually hot in the cache during the program exe.
+// both are stored in the RAM, however the stack is usually hot in the cache during the program exe, no cache misses usulally as stack can be put on a single cache line and passing vals into registers during function calls..
 // we are allowed to store data in stack/heap.
 // stacks are contiguous and stack pointer just moves around based on the size of allocation and stack growth is dependent on the endianness of the machine.
 // stack allocation is very fast as stack pointer tracks mem blocks and single cpu instruction to assign new block.
+// stack is scope bound --> mem reclaimed as soon as out of cost stack pointer moves down to where it was before the scope began.
+// new keyword calls malloc and the heap assignment is executed by a system call by the OS. program maintains a free list(which blocks of mem are free), when malloc called, go through free list and see where assignment possible.
+// malloc is very heavy mainly due to bookkeepiong done and possible system calls each time more memory required than on the free list.
+
+// the only performance difference is allocation ---> if a 1GB block preassigned and then new called, results in same performance as stack, cpu cache misses possible but not significant.
+
 
 #include <iostream>
 #include <memory>
