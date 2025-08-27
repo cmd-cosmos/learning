@@ -23,6 +23,20 @@ char* Problem()
     return "Hello";
 }
 
+class Device {};
+
+class DeviceManager
+{
+    private:
+    // custom type ---> mapping string to device object vector
+        std::unordered_map<std::string, std::vector<Device*>> m_Devices;
+    public:
+        const std::unordered_map<std::string, std::vector<Device*>>& GetDevices() const
+        {
+            return m_Devices;
+        }
+};
+
 int main()
 {
     int a = 5;
@@ -42,6 +56,16 @@ int main()
     
     // prob.size(); // cannot do this as prob is a char*
 
+    DeviceManager dm;
+    // dm.GetDevices(); // this is ok, but when we need to assign we need to mention type before the assignment and the type here is super complex to read
 
+    // super comlex assignment syntax
+    // const std::unordered_map<std::string, std::vector<Device*>>& devs = dm.GetDevices();
+
+    // aliasing the type ---> use typedef or using 
+    // typedef std::unordered_map<std::string, std::vector<Device*>> Device_Map;
+    // using Device_Map = std::unordered_map<std::string, std::vector<Device*>>;
+    // or just use auto
+    auto simple = dm.GetDevices(); // evaluated to the complex thing
     return 0;
 }
