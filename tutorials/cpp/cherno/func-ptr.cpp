@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 void Print()
 {
@@ -12,6 +13,19 @@ void Print()
 void Val(int a)
 {
     std::cout << a << '\n';
+}
+
+void PrintString(const std::string& str)
+{
+    std::cout << str << '\n';
+}
+
+void ForEach(const std::vector<std::string>& vec, void(* printString_ptr)(const std::string&))
+{
+    for (std::string inp : vec)
+    {
+        printString_ptr(inp);
+    }
 }
 
 int main()
@@ -37,6 +51,12 @@ int main()
     val_func(6);
     val_func(7);
     val_func(0);
+
+    std::vector<std::string> vec = {"Batman", "Alfred", "Robin", "Nighwing", "Joker"};
+
+    // creating a for each loop to iterate through the vector
+    ForEach(vec, PrintString);
+    // we could use lambda as it is a throwaway func.
 
     return 0;
 }
