@@ -23,6 +23,11 @@ int main()
     int x = 10;
     // [] ---> capture brackets ---> used to capture external variables ---> by ref & or by value =
     auto lambda = [&](int val) { return val + x;}; // capture here passes by reference.
-    std::cout << lambda(5);
+    std::cout << lambda(5) << std::endl;
+
+    // good use for lambas --> find_if function from the algorithm library to go through an iterable using iterators like begin() and end()
+    auto iter = std::find_if(values.begin(), values.end(), [](int val) {return val > 4;});
+    std::cout << *iter << std::endl;
+
     return 0;
 }
