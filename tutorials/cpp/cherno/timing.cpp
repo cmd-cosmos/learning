@@ -24,14 +24,23 @@ struct Timer
     }
 };
 
-
 // how long does cout take to print the statements to console in the foo function.
 void foo()
 {
     Timer timer;
-    for (int i; i < 100; i++)
+    for (int i=0; i < 100; i++)
     {
         std::cout << "I am Batman" << std::endl;
+    }
+}
+
+// slight optimization --> std::endl flushes buffer thus increasing time, using \n to endline
+void bar()
+{
+    Timer timer;
+    for (int i=0; i < 100; i++)
+    {
+        std::cout << "I am Vengeance\n";
     }
 }
 
@@ -53,7 +62,11 @@ int main()
     }
     #endif
 
-    foo();
-    
+    #if 0
+    foo(); // Timer took: 45.4755ms
+    #endif
+
+    bar(); // Timer took: 8.9816ms
+
     return 0;
 }
