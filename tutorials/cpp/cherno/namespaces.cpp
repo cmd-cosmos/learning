@@ -28,6 +28,23 @@ namespace batman
     }
 }
 
+// nesting namespaces
+namespace multi{
+    namespace functions{
+        void printf()
+        {
+            std::cout << "===========================================" << std::endl;
+            std::cout << "multi namespace exec. started" << std::endl;
+            falcon::launch();
+            starship::launch();
+            using namespace batman; // nesting custom namespace in a custom nested namespace
+            cout(); // cout from the batman namespace
+            std::cout << "multi namespace exec. complete" << std::endl;
+            std::cout << "===========================================" << std::endl;
+        }        
+    }
+}
+
 int main()
 {
     // using namespace falcon;
@@ -36,6 +53,7 @@ int main()
 
     // 2 functions with the same name ---> but different functionalities
     // namespaces defines the functionality of the member associated with the namespace.
+    //2 symbols with the same name are not parsed by the linker thus resulting in a linking error
 
     falcon::launch();
     starship::launch();
@@ -60,5 +78,12 @@ int main()
         launch(); // now launch function defaults to starship scope.
     }
 
+    {
+        // separate scope to test the nested namespace
+        multi::functions::printf();
+
+    }
+    // prefer to use namespace in small scopes insead of main scope or larger scopes.
+    // never use complete namespace in header files
     return 0;
 }
