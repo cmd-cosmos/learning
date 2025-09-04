@@ -1,4 +1,11 @@
 // basic java program
+// class --> blueprint for everything ---> contain members
+// object --> instance of a class
+// methods --> member of class ---> member functions --> do something
+// property --> member of class ---> member variables --> store something
+// access modifiers --> public, private or protected --> who can use it
+// static --> in this context --> remove the need for object instantiation of the class.
+// identifiers --> names given to property or class itself
 
 public class Basic{
     public static void main(String[] args){
