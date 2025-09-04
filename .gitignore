@@ -1,4 +1,12 @@
+### c++ ignores
 *.exe
+
+### VS code ignores
 .vscode/
 
+### python ignores
 __pycache__/
+
+
+### java ignores
+*.class
