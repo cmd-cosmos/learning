@@ -35,8 +35,11 @@ int main()
     // correct deletion logic.
     for (int i = 0; i < 50; i++)
     {
+        // delete each individual array inside the main array
         delete[] buffer[i];
     }
+    // deleting the main array 
+    delete[] buffer;
 
     return 0;
 }
