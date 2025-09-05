@@ -1,5 +1,6 @@
 // multi dimensional arrays 
 // 2D arrays ---> array of arrays ---> buffer of pointers pointing to arrays
+// major issues ---> memory fragmantation --> each cell in the main array contains a pointer to individual int arrays which means there are high chances of cache misses.
 
 #include <iostream>
 #include <string>
@@ -40,6 +41,33 @@ int main()
     }
     // deleting the main array 
     delete[] buffer;
+
+    int** a2d = new int*[10];
+    for (int i = 0; i < 10; i++)
+    {
+        // this assigns each pointer in the root array with individual arrays having 10 vals each
+        // by the end total 100 ints can be added but in 10 different arrays pointed to by 10 pointers and could be at any position in memory
+        // this would result in cache misses
+        // instead if we assign all the 100 elements to a single memory --> program will be much faster and iterating would be contiguous.
+        a2d[i] = new int[10];
+    }
+    // assignment to this a2d array will be super slow
+    for(int x = 0; x < 10; x++)
+    {
+        for(int y = 0; y<10; y++)
+        {
+            a2d[x][y] = 1; // assign all vals a 1
+        }
+    }
+    // alternate method to do this using a single array 
+    int* clean_arr = new int[10*10];
+    for(int x = 0; x < 10; x++)
+    {
+        for(int y = 0; y<10; y++)
+        {
+            clean_arr[x + y * 10] = 1; // assign all vals a 1
+        }
+    }
 
     return 0;
 }
