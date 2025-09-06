@@ -4,6 +4,12 @@
 #include <iostream>
 #include <string>
 
+struct Entity
+// empty struct ---> at least 1 byte
+{
+    int x, y;
+};
+
 int main()
 {
     int a = 10;
@@ -20,6 +26,13 @@ int main()
     double garbage = *(double*)&a; // cast a 4 byte mem addr to a 8 byte address in place and deref ---> so the int a was assigned 4 bytes but now we are asking for a cast to a pointer to a double var -- which req 8 bytes so it expands the pre existing alloc.
     std::cout << garbage << std::endl;
     //OUTPUT -  2.97079e-313
+
+    Entity e = { 5,8 };
+    int x = e.x;
+    // we can also use type punning
+    int* position = (int *)&e;
+    int y = *(int*)((char*)&e + 4);
+    std::cout << y << std::endl;
 
     return 0;
 }
