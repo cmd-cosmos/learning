@@ -2,6 +2,9 @@
 # anagrams ---> same characters with same frequencies
 # eg) danger ---> garden is an anagram
 
+# solution 1 ---> based on the lexicographically ordered nature of sorted strings
+# O(nlogn) time complexity
+
 from collections import Counter
 
 str1 = str(input("Enter str 1: ")).lower()
@@ -20,6 +23,7 @@ print(result)
 '''
 manual frequency counter like a hash table
 '''
+# O(n) time and space 
 
 print("-"*20 + "Maunual Solution" + "-"*20)
 
@@ -34,19 +38,19 @@ else:
             f1[character] += 1
         else:
             f1[character] = 1
-    
+
     for character in str2:
         if character in f2:
             f2[character] += 1
         else:
             f2[character] = 1
-    
+
     for key in f1:
         if key not in f2 or f1[key] != f2[key]:
             flag = False
         else:
             flag = True
-    
+
     if flag == True:
         print("Anagram")
     else:
