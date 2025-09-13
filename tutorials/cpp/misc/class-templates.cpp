@@ -1,6 +1,8 @@
 // class templates --> similar to function templates but for class overloads
 // https://www.youtube.com/watch?v=mQqzP9EWu58
-
+// templates are used at compile time and not at runtime
+// passing length of an array as a variable to a template parameter ---> not allowed
+// because of the compile time constraint
 #include <iostream>
 #include <string>
 #include <vector>
