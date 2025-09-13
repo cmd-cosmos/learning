@@ -5,23 +5,28 @@
 #include <string>
 #include <vector>
 
-class Base
+class intArray
+// main problem is if we want a string array, we need to duplicate the class and use strings in place of ints
+// class templates help override type behavior.
 {
-    private:
-        int m_X;
-        int m_Y;
-
     public:
-        Base(int x, int y) : m_X(x), m_Y(y)
-        {
-            std::cout << "Base Constructor.\n";
-        };
-        ~Base()
-        {
-            std::cout << "Base Destructor.\n";
-        };
+        int array[10];
 
+        void fill(int val)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                array[i] = val;
+            }
+        }
+
+        int& at(int idx)
+        {
+            return array[idx];
+        }
 };
+
+
 
 int main()
 {
