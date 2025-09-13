@@ -26,11 +26,11 @@ class intArray
         }
 };
 
-template<typename T>
+template<typename T, int size>
 class Array
 {
     public:
-        T array[10];
+        T array[size];
 
         void fill(T val)
         {
@@ -55,9 +55,9 @@ int main()
 {
     // the Array class produces homogenous and consistent arrays
     // only 1 value populated throughout the array
-    Array<std::string> strArray;
+    Array<std::string, 10> strArray;
     strArray.fill("Batman");
-    Array<int> intArray;
+    Array<int, 10> intArray;
     intArray.fill(10);
     for (int i = 0; i < 10; i++)
     {
@@ -67,7 +67,7 @@ int main()
     std::cout << strArray.at(4) << std::endl;
     std::cout << strArray.at(3) << std::endl;
 
-    Array<std::string> characters;
+    Array<std::string, 10> characters;
     characters.fillUnique(0,"Batman");
     characters.fillUnique(1,"Joker");
     characters.fillUnique(2,"Alfred");
@@ -83,7 +83,7 @@ int main()
         std::cout << characters.at(i) << std::endl;
     }
     
-    Array<int> nums;
+    Array<int, 10> nums;
     for (int i = 0; i < 10; i++)
     {
         nums.fillUnique(i,i);
