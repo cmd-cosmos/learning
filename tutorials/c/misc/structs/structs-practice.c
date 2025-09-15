@@ -3,6 +3,14 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+typedef struct Character
+{
+    int id;
+    char name[100];
+}character_t;
+
 
 int main(int argc, char* argv[])
 {
@@ -19,6 +27,19 @@ int main(int argc, char* argv[])
     for (int i = 0; i < 5; i++)
     {
         printf("(%d, %d)\n", path[i].x, path[i].y);
+    }
+
+    character_t characters[] = {
+        {1, "Batman"},
+        {2, "Superman"},
+        {3, "Wonder Woman"},
+        {4, "Green Lantern"},
+        {5, "Flash"},
+    };
+    printf("---------Justice League Database---------\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("id: %d, name: %s\n", characters[i].id, characters[i].name);
     }
     
     return 0;
