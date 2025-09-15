@@ -4,6 +4,7 @@
 - each variable is a member/property
 - members --> PUBLIC by default
 - no methods/ constructrs like in C++/Java classes
+- structs have their own namespace
 - Syntax Structure
 struct Coordinate
 {
@@ -11,4 +12,20 @@ struct Coordinate
     ...
     <type> <member n>;
 };
+
+- struct is created in the stack memory in the main frame unless done explicitly
+- good idea to 0 initialize all members
+- since struct on the stack frame, without init. the members could contain garbage vals
+- very important to init. automatic vars on the stack and dynamic vars on the heap
+- static vars are automatically initialized to 0 if nothing assigned
+- member initializer list just works with same line declaration and initialization
+
+- typedef used to alias declaration statement into a single typename to enhance readability
+
+- another method is to include typedef with the struct declaration and definition block
+- Syntax:
+typedef struct <struct name> // actual struct name
+{
+    // members
+} struct_name_t; // alias
 
