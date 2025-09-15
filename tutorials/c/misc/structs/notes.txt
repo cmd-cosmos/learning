@@ -1,0 +1,14 @@
+### Structs
+
+- structs are containers for related vars
+- each variable is a member/property
+- members --> PUBLIC by default
+- no methods/ constructrs like in C++/Java classes
+- Syntax Structure
+struct Coordinate
+{
+    <type> <member 0>;
+    ...
+    <type> <member n>;
+};
+
