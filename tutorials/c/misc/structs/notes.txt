@@ -29,3 +29,5 @@ typedef struct <struct name> // actual struct name
     // members
 } struct_name_t; // alias
 
+- accessing struct members with the arrow syntax
+- (structPtr->member) is syntactic sugar for (*structPtr).member
