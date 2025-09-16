@@ -19,6 +19,8 @@ typedef struct Character
     stats_t stats;
 }character_t;
 
+character_t createCharacter(int id, char name[100], stats_t stats);
+
 
 int main(int argc, char* argv[])
 {
@@ -50,9 +52,35 @@ int main(int argc, char* argv[])
     int size = sizeof(characters) / sizeof(characters[0]);
     printf("Total active members: %d\n\n", size);
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < size; i++)
     {
         printf("id: %d, name: %s,\nStats:\npower: %d, intelligence: %d\n\n", characters[i].id, characters[i].name, characters[i].stats.power, characters[i].stats.intelligence);
     }
+
+    printf("New Member\n");
+    character_t joker = createCharacter(6, "Joker", (stats_t){100,100});
+    printf("%d\n", joker.id);
+    printf("%s\n", joker.name);
+    printf("%d\n", joker.stats.power);
+    printf("%d\n", joker.stats.intelligence);
+
     return 0;
+}
+
+// struct generators ---> similar to class initializers in c++
+character_t createCharacter(int id, char name[], stats_t stats)
+{
+    character_t character;
+    character.id = id;
+    if (name != NULL)
+    {
+        strcpy(character.name, name);
+    }
+    else
+    {
+        strcpy(name, "Default");
+    }
+    character.stats.power = stats.power;
+    character.stats.intelligence = stats.intelligence;
+    return character;
 }
