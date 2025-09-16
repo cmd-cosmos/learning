@@ -45,10 +45,14 @@ int main(int argc, char* argv[])
         {5, "Flash", {95,70}},
     };
     printf("---------Justice League Database---------\n");
+    
+    // getting number of members in the struct
+    int size = sizeof(characters) / sizeof(characters[0]);
+    printf("Total active members: %d\n\n", size);
+
     for (int i = 0; i < 5; i++)
     {
         printf("id: %d, name: %s,\nStats:\npower: %d, intelligence: %d\n\n", characters[i].id, characters[i].name, characters[i].stats.power, characters[i].stats.intelligence);
     }
-    
     return 0;
 }
