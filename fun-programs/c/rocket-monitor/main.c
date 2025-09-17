@@ -36,10 +36,15 @@ enum SystemHealth
 typedef enum Sensors sensors_t;
 typedef enum SystemHealth systemHealth_t;
 
+systemHealth_t getRandomHealthStatus()
+{
+    return rand() % 4;
+}
+
 int main(void)
 {
     sensors_t sensorBus;
-
+    systemHealth_t sensorStatus[NUM_SENSORS];
     bool health_ping_permission = 0;
     bool got_input = 0;
     char intermediate_permission_buffer;
@@ -72,6 +77,7 @@ int main(void)
 
     if (health_ping_permission == 1)
     {
+        printf("----------------------------------------------------------------------\n");
         printf("Access modified ---> Pinging Sensor Bus\n");
         for (int i = 0; i < NUM_SENSORS; i++)
         {
@@ -81,42 +87,43 @@ int main(void)
         printf("----------------------------------------------------------------------\n");
         for (int i = 0; i < NUM_SENSORS; i++)
         {
-            printf("PING on port %d: ", i);
+            printf("STATUS on port %d: ", i);
             sensorBus = i;
+            sensorStatus[i] = getRandomHealthStatus();
             
             switch (sensorBus)
             {
                 case GSE:
-                    printf("Reading GSE health signal...\n");
+                    printf("Reading GSE health signal ---> %d\n", sensorStatus[i]);
                     break;
                 case SEA_ENGINE:
-                    printf("Reading Sea Level Engine health signal...\n");
+                    printf("Reading Sea Level Engine health signal ---> %d\n", sensorStatus[i]);
                     break;
                 case VAC_ENGINE:
-                    printf("Reading Vacuume Level Engine health signal...\n");
+                    printf("Reading Vacuume Level Engine health signal ---> %d\n", sensorStatus[i]);
                     break;
                 case BOOSTER:
-                    printf("Reading Booster health signal from sys integration health port...\n");
+                    printf("Reading Booster health signal from sys integration health port ---> %d\n", sensorStatus[i]);
                     break;
                 case SHIP:
-                    printf("Reading Ship health signal from sys2 integrated health port...\n");
+                    printf("Reading Ship health signal from sys2 integrated health port ---> %d\n", sensorStatus[i]);
                     break;
                 case SYS_PRESSURE:
-                    printf("Reading SYSTEM PRESSURE...\n");
+                    printf("Reading SYSTEM PRESSURE ---> %d\n", sensorStatus[i]);
                     break;
                 case SYS_TEMPERATURE:
-                    printf("Reading SYSTEM TEMPERATURE...\n");
+                    printf("Reading SYSTEM TEMPERATURE ---> %d\n", sensorStatus[i]);
                     break;    
                 default:
-                printf("Pinging...\n");
+                printf("Reading on port %d ---> Unknown Sensor\n");
                 break;
             }
             sleep(2);
         }    
         printf("----------------------------------------------------------------------\n");
-        printf("Health Check ---> Sensor Read Complete\n");
-        printf("SYSTEM HEALTH NOMINAL");
-        health_check_complete = 1;
+        printf("Health Check ---> Sensor Read Complete\n\n");
+        
+
     }
 
     return 0;
