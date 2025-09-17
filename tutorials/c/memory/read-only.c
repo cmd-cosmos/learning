@@ -7,6 +7,8 @@
 // p1: 000001AB0455F890 <--- returned pointer, last 12 bits(890 in this case) of the address tell us where we are on the page, if they are 0 then we know we are at the start of the page.
 // create page aligned memory allocs instead of calc. how many bytes to move to reach the beginning of the page
 
+// reference: https://youtu.be/AYSISa95oJE?si=-VOVWagZn6SqLCR-
+
 #include <stdio.h>
 #include <signal.h>
 #include <windows.h>
