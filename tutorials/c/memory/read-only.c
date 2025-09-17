@@ -35,6 +35,35 @@ int main()
         return 1;
     }
     printf("ptr --> %p", ptr); //ptr --> 00000123BFAF6000 <--- 12 of the trailing bits are 000 which means we have allocated at the beginning of the page
-    free(ptr);
+
+    // using mmap equivalent to assign 2 pages and ensure they are read only and anonymous
+
+    void *mmap_readwrite = VirtualAlloc(
+        NULL,
+        buffersize,
+        MEM_COMMIT | MEM_RESERVE,
+        PAGE_READWRITE              // allows to rewrite
+    );
+
+    void *mmap_read_only = VirtualAlloc(
+        NULL,
+        buffersize,
+        MEM_COMMIT | MEM_RESERVE,
+        PAGE_READONLY              // seg fault when memset used
+    );
+
+    printf("mmap_readwrite: %p\n", mmap_readwrite);
+    printf("mmap_readonly: %p\n", mmap_read_only);
+
+    printf("starting write operation...\n");
+    memset(mmap_readwrite, 100, buffersize);
+    printf("write complete on read write pages\n");
+    memset(mmap_read_only, 100, buffersize);
+
+    VirtualFree(mmap_read_only, 0, MEM_RELEASE);
+    VirtualFree(mmap_readwrite, 0, MEM_RELEASE);
+    _aligned_free(ptr);
+    free(p1);
+    
     return 0;
 }
