@@ -1,4 +1,4 @@
-// program to emulate 
+// program to emulate launch countdown
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +25,16 @@ enum Sensors
     NUM_SENSORS       // total number of sensors on the bus
 };
 
+enum SystemHealth
+{
+    NOMINAL, 
+    ABNORMAL,
+    FAULT,
+    CRITICAL,
+};
+
 typedef enum Sensors sensors_t;
+typedef enum SystemHealth systemHealth_t;
 
 int main(void)
 {
@@ -63,11 +72,13 @@ int main(void)
 
     if (health_ping_permission == 1)
     {
+        printf("Access modified ---> Pinging Sensor Bus\n");
         for (int i = 0; i < NUM_SENSORS; i++)
         {
             printf("Health Ping...\n");
             sleep(1);
         }
+        printf("----------------------------------------------------------------------\n");
         for (int i = 0; i < NUM_SENSORS; i++)
         {
             printf("PING on port %d: ", i);
@@ -100,8 +111,12 @@ int main(void)
                 printf("Pinging...\n");
                 break;
             }
-            sleep(1);
+            sleep(2);
         }    
+        printf("----------------------------------------------------------------------\n");
+        printf("Health Check ---> Sensor Read Complete\n");
+        printf("SYSTEM HEALTH NOMINAL");
+        health_check_complete = 1;
     }
 
     return 0;
