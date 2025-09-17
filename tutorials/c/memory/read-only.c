@@ -56,6 +56,13 @@ int main()
     printf("mmap_readonly: %p\n", mmap_read_only);
 
     printf("starting write operation...\n");
+    for(int i = 0; i < buffersize; i++)
+    {
+        printf("%d (%p): writing...\n", i, ptr + i );
+        ((char*)ptr)[i] = 42;
+    }
+    printf("writing complete on aligned alloc pages...\n");
+    printf("started write on mmap readwrite page...\n");
     memset(mmap_readwrite, 100, buffersize);
     printf("write complete on read write pages\n");
     memset(mmap_read_only, 100, buffersize);
