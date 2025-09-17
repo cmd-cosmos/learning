@@ -65,10 +65,31 @@ int main()
     printf("started write on mmap readwrite page...\n");
     memset(mmap_readwrite, 100, buffersize);
     printf("write complete on read write pages\n");
-    memset(mmap_read_only, 100, buffersize);
+    // memset(mmap_read_only, 100, buffersize);
 
+    void *failure = VirtualAlloc(
+        NULL,
+        buffersize,
+        MEM_COMMIT | MEM_RESERVE,
+        PAGE_READWRITE              // trying to create a seg fault by writing once and then protecting the region
+    );
+    if(!failure){ perror("VirtualAlloc");}
+    memset(failure, 42, buffersize); // single write in the read write 2 page region
+    printf("ran single write operation on the failure region..\n");
+    DWORD oldProtect;
+    if(!VirtualProtect(failure, buffersize, PAGE_READONLY, &oldProtect))
+    {
+        perror("VirtualProtect");
+        VirtualFree(failure, 0, MEM_RELEASE);
+        return 1;
+    }
+    printf("DO NOT WRITE TO FAILURE REGION --> failure region set to read only...\n");
+    // attempting write
+    ((char*)failure)[21] = 0;   // program will exit execution here as seg fault has happened
+    // freeing all assigned memory
     VirtualFree(mmap_read_only, 0, MEM_RELEASE);
     VirtualFree(mmap_readwrite, 0, MEM_RELEASE);
+    VirtualFree(failure, 0, MEM_RELEASE);
     _aligned_free(ptr);
     free(p1);
     
