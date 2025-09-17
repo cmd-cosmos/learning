@@ -22,8 +22,19 @@ int main()
     DWORD pagesize = sysInfo.dwPageSize;
     printf("pagesize = %lu bytes\n", pagesize); 
 
+    int buffersize = 2 * pagesize;
+
     char* p1 = malloc(sizeof(char) * 50);
     printf("p1: %p\n", p1);
 
+    // allocates 2 pages of memory
+    void* ptr = _aligned_malloc(buffersize, pagesize);
+    if(!ptr)
+    {
+        perror("allign_malloc failure");
+        return 1;
+    }
+    printf("ptr --> %p", ptr); //ptr --> 00000123BFAF6000 <--- 12 of the trailing bits are 000 which means we have allocated at the beginning of the page
+    free(ptr);
     return 0;
 }
