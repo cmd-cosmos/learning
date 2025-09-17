@@ -46,7 +46,7 @@ int main(void)
     while(got_input == 0)
     {
         printf("Set health ping bit [y/n]: ");
-        scanf("%s", &intermediate_permission_buffer);
+        scanf(" %c", &intermediate_permission_buffer);
         if (intermediate_permission_buffer == 'y' || intermediate_permission_buffer == 'Y')
         {
             health_ping_permission = 1;
