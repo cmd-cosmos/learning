@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <time.h>
 
 struct SpaceShip
 {
@@ -31,6 +32,7 @@ enum SystemHealth
     ABNORMAL,
     FAULT,
     CRITICAL,
+    TOTAL_LEVELS
 };
 
 typedef enum Sensors sensors_t;
@@ -38,7 +40,7 @@ typedef enum SystemHealth systemHealth_t;
 
 systemHealth_t getRandomHealthStatus()
 {
-    return rand() % 4;
+    return rand() % TOTAL_LEVELS;
 }
 
 int main(void)
@@ -74,7 +76,6 @@ int main(void)
     }
     
     bool health_check_complete = 0;
-
     if (health_ping_permission == 1)
     {
         printf("----------------------------------------------------------------------\n");
@@ -123,7 +124,32 @@ int main(void)
         printf("----------------------------------------------------------------------\n");
         printf("Health Check ---> Sensor Read Complete\n\n");
         
-
+        bool goNoGo = 1; // assume a go for launch
+        health_check_complete = 1;
+        for (int i = 0; i < NUM_SENSORS; i++)
+        {
+            if (sensorStatus[i] == FAULT || sensorStatus[i] == CRITICAL)
+            {
+                goNoGo = 0; // pre-empt all processes
+                break;
+            }
+        }
+        if (goNoGo && health_check_complete)
+        {
+            printf("System Health: NOMINAL\n");
+            printf("Initiating Countdown Sequence...\n");
+            for (int i = 10; i >= 0; i--)
+            {
+                printf("T-minus %d seconds\n", i);
+                sleep(1);
+            }
+            printf("Liftoff...\n");
+            printf("----------------------------------------------------------------------\n");
+        }
+        else
+        {
+            printf("System Health: ABNORMAL ---> PROCEEDING TO ABORT SEQUENCE\n");
+        }
     }
 
     return 0;
