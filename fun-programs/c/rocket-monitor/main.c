@@ -45,6 +45,8 @@ systemHealth_t getRandomHealthStatus()
 
 int main(void)
 {
+    srand(time(NULL));
+    
     sensors_t sensorBus;
     systemHealth_t sensorStatus[NUM_SENSORS];
     bool health_ping_permission = 0;
