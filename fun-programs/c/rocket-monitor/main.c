@@ -46,6 +46,8 @@ systemHealth_t getRandomHealthStatus()
 int main(void)
 {
     srand(time(NULL));
+    // access winapi to popup a messagebox --> for fun
+    MessageBox(NULL, "Commencing startup health check sequence", "Sequence Alert - Go/No-Go", MB_OKCANCEL);
     
     sensors_t sensorBus;
     systemHealth_t sensorStatus[NUM_SENSORS];
