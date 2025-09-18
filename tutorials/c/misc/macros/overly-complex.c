@@ -1,4 +1,5 @@
 // over complicating a basic program using macros 
+// inspired from the windows.h library file macro definitions
 
 #include <stdio.h>
 #include <stdint.h>
