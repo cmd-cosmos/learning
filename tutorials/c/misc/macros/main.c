@@ -10,6 +10,9 @@
 // function ---> ternary expression as a macro
 #define MIN(A, B) (A < B ? A : B)
 
+// wrap args in () to ensure operation done before comparision
+#define VALID_MIN(A, B) ((A) < (B) ? (A) : (B))
+
 int getNextNum()
 {
     int nextNum = rand() % 100;
@@ -22,7 +25,16 @@ int main()
     printf("%d\n", MIN(3,8));
     printf("%f\n", MIN(3.14,100.011));
     
-    
+    int n1, n2, n3;
 
+    // will not compile due to ambiguity of assignment
+    // n3 = MIN(n1=getNextNum(),n2=getNextNum());
+    // translate to ---> (n1=getNextNum() < n2=getNextNum() ? n1=getNextNum() : n2=getNextNum())
+    // printf("%d\n", n3);
+    
+    // same format, works now as  args enclosed as separate operations
+    n3 = VALID_MIN(n1=getNextNum(), n2=getNextNum());
+
+    
     return 0;
 }
