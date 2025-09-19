@@ -10,3 +10,6 @@ __pycache__/
 
 ### java ignores
 *.class
+
+### C Makefile
+*Makefile
