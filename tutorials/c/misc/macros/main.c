@@ -11,6 +11,8 @@
 #define MIN(A, B) (A < B ? A : B)
 
 // wrap args in () to ensure operation done before comparision
+// compiles correctly but still wrong functionality
+// produces 3 next vals before conlcuding minimum
 #define VALID_MIN(A, B) ((A) < (B) ? (A) : (B))
 
 int getNextNum()
@@ -32,8 +34,10 @@ int main()
     // translate to ---> (n1=getNextNum() < n2=getNextNum() ? n1=getNextNum() : n2=getNextNum())
     // printf("%d\n", n3);
     
-    // same format, works now as  args enclosed as separate operations
+    // same format, compiles now as args enclosed as separate operations
     n3 = VALID_MIN(n1=getNextNum(), n2=getNextNum());
+    // valid compilation but unwanted behavior
+    printf("n3 = %d", n3);
 
     
     return 0;
