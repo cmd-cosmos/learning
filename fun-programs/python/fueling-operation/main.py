@@ -38,34 +38,33 @@ def getTargetVehicle():
         print("3. Integrated System - Starship")
         print("4. Dry Run")
         print("-"*50)
-        targetVehicle = int(input("Enter Selection: "))
-        if targetVehicle == "":
+        
+        try:
+            targetVehicle = int(input("Enter Selection: "))
+            if targetVehicle == 1:
+                print("Proceeding with Ship Prop Load Procedures...")
+                print("-"*50)
+                valid=True
+            elif targetVehicle == 2:
+                print("Proceeding with Booster Prop Load Procedures...")
+                print("-"*50)
+                valid=True
+            elif targetVehicle == 3:
+                print("Proceeding with Starship SuperHeavy System Load Procedures...")
+                print("-"*50)
+                valid=True
+            elif targetVehicle == 4:
+                print("Dry Run - Test Procedure 1.2.31")
+                print("-"*50)
+                valid=True
+            else:
+                print("Invalid Input")
+                print("-"*50)
+        except ValueError:
             print("Invalid Input")
-            print("-"*50)
-        elif targetVehicle == 1:
-            print("Proceeding with Ship Prop Load Procedures...")
-            print("-"*50)
-            valid=True
-        elif targetVehicle == 2:
-            print("Proceeding with Booster Prop Load Procedures...")
-            print("-"*50)
-            valid=True
-        elif targetVehicle == 3:
-            print("Proceeding with Starship SuperHeavy System Load Procedures...")
-            print("-"*50)
-            valid=True
-        elif targetVehicle == 4:
-            print("Dry Run - Test Procedure 1.2.31")
-            print("-"*50)
-            valid=True
-        else:
-            print("Invalid Input")
-            print("-"*50)
+            print("-" * 50)
 
     return vehicleMap[targetVehicle]
-
-
-    
     
 # CONTROL LOOP
 
