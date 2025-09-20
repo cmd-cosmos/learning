@@ -30,28 +30,37 @@ def getTargetVehicle():
     valid = False
 
     while(valid==False):
+        print("-"*50)
         print("Choose Test Article/Procedure: ")
+        print("-"*50)
         print("1. Ship ")
         print("2. Booster ")
         print("3. Integrated System - Starship")
         print("4. Dry Run")
+        print("-"*50)
         targetVehicle = int(input("Enter Selection: "))
         if targetVehicle == "":
             print("Invalid Input")
+            print("-"*50)
         elif targetVehicle == 1:
             print("Proceeding with Ship Prop Load Procedures...")
+            print("-"*50)
             valid=True
         elif targetVehicle == 2:
             print("Proceeding with Booster Prop Load Procedures...")
+            print("-"*50)
             valid=True
         elif targetVehicle == 3:
             print("Proceeding with Starship SuperHeavy System Load Procedures...")
+            print("-"*50)
             valid=True
         elif targetVehicle == 4:
             print("Dry Run - Test Procedure 1.2.31")
+            print("-"*50)
             valid=True
         else:
             print("Invalid Input")
+            print("-"*50)
 
     return vehicleMap[targetVehicle]
 
@@ -62,7 +71,6 @@ def getTargetVehicle():
 
 if __name__ == "__main__":
     targetVehicle = getTargetVehicle()
-    print(targetVehicle)
 
 
 
