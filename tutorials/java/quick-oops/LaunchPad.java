@@ -19,6 +19,17 @@ public class LaunchPad{
         launchPad.add(rocket);
     }
 
+    // COMPILE TIME POLYMORPHISM ---> FUNCTION/METHOD OVERLOADING
+    public void addRocket(String name, int serial_number, String type)
+    {
+        launchPad.add(new Stage(name, serial_number, type)); 
+    }
+
+    public void addRocket(String name, int serial_number, int count, String engineName)
+    {
+        launchPad.add(new Engines(name, serial_number, count, engineName)); 
+    }
+
     // PRINT METHOD FOR THE LAUNCHPAD LIST
     public void displayRockets()
     {
