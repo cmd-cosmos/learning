@@ -29,4 +29,11 @@ public class Engines extends Rocket {
         
         return fmtOut;
     }
+
+    public void displayInfo()
+    {
+        System.out.println("Engine: " + getName() + "\n" +
+                           "   |---> Batch Number: " + getSerNum() + "\n" + 
+                           "   |---> Count: " + getCount() + "\n");
+    }
 }

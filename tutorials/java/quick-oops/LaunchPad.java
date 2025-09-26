@@ -39,5 +39,14 @@ public class LaunchPad{
         }
     }
 
+    // ABSTRACT DISPLAY METHOD
+    public void abstractLogger()
+    {
+        for (Rocket rocket : launchPad)
+        {
+            rocket.displayInfo();
+        }
+    }
+
 
 }

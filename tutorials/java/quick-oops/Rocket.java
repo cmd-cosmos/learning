@@ -33,4 +33,10 @@ public class Rocket{
         
         return fmtOut;
     }
+
+    public void displayInfo()
+    {
+        System.out.println("ROCKET: " + getName() + "\n" +
+                           "  |----> Serial Number: " + getSerNum());
+    }
 }

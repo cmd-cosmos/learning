@@ -22,4 +22,12 @@ public class Stage extends Rocket{
         
         return fmtOut;
     }
+
+    // using the abstract method
+    public void displayInfo()
+    {
+        System.out.println("Stage: " + getName() + "\n" +
+                        "   |---> Serial Number: " + getSerNum() + "\n" +
+                        "   |---> Type: " + getType()); 
+    }
 }
