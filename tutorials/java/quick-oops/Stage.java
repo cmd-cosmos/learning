@@ -12,4 +12,14 @@ public class Stage extends Rocket{
     public String getType(){
         return type;
     }
+
+    @Override
+    public String toString()
+    {
+        String fmtOut = "Stage: " + getName() + "\n" +
+                        "   |---> Serial Number: " + getSerNum() + "\n" + 
+                        "   |---> Type: " + getType(); 
+        
+        return fmtOut;
+    }
 }

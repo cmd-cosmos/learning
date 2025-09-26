@@ -24,8 +24,7 @@ public class LaunchPad{
     {
         for (Rocket rocket : launchPad)
         {
-            System.out.println("ROCKET: " + rocket.getName());
-            System.out.println("  |----> Serial Number: " + rocket.getSerNum());
+            System.out.println(rocket.toString());
         }
     }
 

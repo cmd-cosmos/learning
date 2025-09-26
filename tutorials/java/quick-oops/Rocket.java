@@ -23,4 +23,14 @@ public class Rocket{
     {
         return serial_number; 
     }
+
+    // POLYMORPHIC BEHAVIOR
+    @Override
+    public String toString()
+    {
+        String fmtOut = "ROCKET: " + getName() + "\n" +
+                        "  |----> Serial Number: " + getSerNum();
+        
+        return fmtOut;
+    }
 }

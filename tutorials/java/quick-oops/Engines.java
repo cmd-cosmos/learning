@@ -19,4 +19,14 @@ public class Engines extends Rocket {
     {
         return engineName;
     }
+
+    @Override
+    public String toString()
+    {
+        String fmtOut = "Engine: " + getName() + "\n" +
+                        "   |---> Batch Number: " + getSerNum() + "\n" + 
+                        "   |---> Count: " + getCount() + "\n"; 
+        
+        return fmtOut;
+    }
 }
