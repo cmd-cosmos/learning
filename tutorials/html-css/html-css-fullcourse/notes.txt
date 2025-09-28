@@ -1,0 +1,9 @@
+### Random Notes
+
+- tag ---> used to define elements, used in pairs usually
+
+- elements ---> components like paragraphs, links, lists etc
+
+- head tag contains header element information like the title of the page shown in the ribbon of the browser 
+
+- name the homepage as index.html as servers return index.html as the homepage per request

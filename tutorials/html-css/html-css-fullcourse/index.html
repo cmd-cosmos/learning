@@ -1,0 +1,33 @@
+<DOCTYPE html>
+<head>
+    <title>Launch Control</title>
+</head>
+<body>
+    <p>Go for Launch</p>
+    <p>--------------------------</p>
+    <p id="counter">10</p>
+    <button onclick="foo()">click</button>
+
+    <script>
+        function foo() 
+        {
+            let a = document.getElementById("counter");
+            let count = parseInt(a.innerText)
+            
+            let interval = setInterval(() => {
+               if (count <= 0)
+               {
+                    clearInterval(interval);
+                    a.innerText = "Liftoff"
+               }
+               else
+               {
+                    a.innerText = count;
+                    count--; 
+               }
+            }, 1000);
+          }
+
+    </script>
+</body>
+</html>
