@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
+#include <stdlib.h>
 
 typedef enum {
     STAGE_PREP,
@@ -21,13 +23,24 @@ typedef enum{
     CRITICAL
 } Telemetry_e;
 
+void launch(); // launch function ---> main run loop
+
 int main()
+{
+    srand(time(NULL)); // seed for the random num gen
+    printf("=================Launch Console=================\n");
+    launch();
+    return 0;
+}
+
+void launch()
 {
     RocketPhases_e phases;
 
     for (int i = STAGE_PREP; i < STAGE_ABORT; i++)
     {
         phases = i;
+        
         if (rand() % 10 == 0)
         {
             printf("Anomaly observed...\n");
@@ -35,6 +48,26 @@ int main()
             phases = STAGE_ABORT;
             break;
         }
+
+        Telemetry_e telemetry = rand() % 3;
+        switch (telemetry)
+        {
+        case NOMINAL:
+            printf("Telemetry: nominal observations\n");
+            break;
+        case WARNING:
+            printf("Telemetry: minor anomaly, fault correction active.\n");
+            break;
+        case CRITICAL:
+            printf("Telemetry: CRITICAL FAULT...SWITCHING TO ABORT SEQUENCE\n");
+            break;        
+        }
+        if (telemetry == CRITICAL)
+        {
+            phases = STAGE_ABORT;
+            break;
+        }
+
         switch (phases)
         {
             
@@ -74,5 +107,4 @@ int main()
             }
     }
 
-    return 0;
 }
