@@ -1,5 +1,7 @@
 // embedded C programming style
 // 1. always typedef enums
+// 2. pascal case
+// 3. add a suffix like _e to identify as enum
 
 #include <stdio.h>
 #include <stdbool.h>
