@@ -1,0 +1,4 @@
+### good practice sources
+
+- portfolio courses - professor Kevin Browne - McMaster University 
+- https://github.com/portfoliocourses
