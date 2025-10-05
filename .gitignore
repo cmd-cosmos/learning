@@ -11,7 +11,9 @@ __pycache__/
 ### java ignores
 *.class
 
-### C ingores
+### C ingores ---> and asm ignores
 *Makefile
 *.obj
+*.s
+
 
