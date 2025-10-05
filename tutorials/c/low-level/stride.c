@@ -23,9 +23,26 @@ int main()
 
     for (size_t i = 0; i < ARRAY_SIZE; i++)
     {
-
+        array[i] =  (i*5);
     }
-    
 
+    // using different strides to test perf. differneces
+    for (int stride = 1; stride <= MAX_STRIDE; stride *= 2)
+    {
+        // start with a stride of 1, calc sum over the whole array using that stride and measure the time delta
+        clock_t start = clock();
+        volatile int sum = 0;
+        for (size_t i = 0; i < ARRAY_SIZE; i += stride)
+        {
+            sum += array[i];
+        }
+        clock_t end = clock();
+
+        double timing = (double)(end - start) / 1000;
+        printf("Stride %d --> Time: %.6f seconds\n", stride, timing);
+    }
+
+    
+    free(array);
     return 0;
 }
