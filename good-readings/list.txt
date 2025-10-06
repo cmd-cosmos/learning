@@ -1,4 +1,6 @@
 - Cache Memory 
 https://medium.com/@kuldeepkumawat195/comprehensive-guide-to-cache-memory-6ef013d1a7b8
 
+- OS 3 easy pieces ---> reading note
+https://www.josehu.com/assets/file/ostep-note/operating-systems-ostep.html#introduction-to-os
 
