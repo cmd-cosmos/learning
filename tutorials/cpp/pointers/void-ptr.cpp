@@ -30,6 +30,7 @@ void print(void* ptr, char type)
         print("cast double and deref: ", *((double*)ptr));
         break;
     default:
+        print("wrong type passed: ", type);
         break;
     }
 }
@@ -45,6 +46,7 @@ int main()
     print(&letter, 'c');
     print(&flt, 'f');
     print(&db, 'd');
+    print(&db, 't'); // passing the wrong type
 
     return 0;
 }
