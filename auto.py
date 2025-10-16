@@ -24,6 +24,34 @@ print("\n\nstatus check: ", status)
 
 proceed = False
 
+def check_remote_and_push():
+    print("checking if remote exists for the current git repo.")
+    time.sleep(1)
+    remote_check = os.system("git remote -v")
+    print("remote check: ", remote_check)
+    if remote_check == 0:
+        print("remote found...")
+        print("pushing to remote...\n")
+        time.sleep(1)
+        os.system("git push")
+        time.sleep(1)
+        print("\ngetting branch status...")
+        time.sleep(1)
+        os.system("git status")
+        time.sleep(1)
+        clean_flag = input("would you like to clear screen[y/n]: ").lower().strip()
+        if clean_flag == 'y':
+            print("clearing screen...")
+            time.sleep(1)
+            os.system("cls")
+        else:
+            print("\nsequence complete...")
+    else:
+        print("no remote found...")
+        print("exiting sequence without pushing to remote....")
+        time.sleep(1)
+        exit()
+
 def commit():
     os.system("git add --all")
     inp_flag = input("add custom message for the commit[y/n]: ").lower().strip()
@@ -36,20 +64,7 @@ def commit():
     os.system(f'git commit -m "{msg_string}"')
     push_conf = input("ready to push changes[y/n]: ").lower().strip()
     if push_conf == "y":
-        time.sleep(1)
-        print("pushing to remote...")
-        os.system("git push")
-        print("\ngetting branch status...")
-        time.sleep(1)
-        os.system("git status")
-        time.sleep(1)
-        clean_flag = input("would you like to clear screen[y/n]: ").lower().strip()
-        if clean_flag == 'y':
-            print("clearing screen...")
-            time.sleep(1)
-            os.system("cls")
-        else:
-            print("\nsequence complete...")
+        check_remote_and_push()
     else:
         print("\nexiting without pushing.")
         time.sleep(1)
