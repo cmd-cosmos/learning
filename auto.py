@@ -34,6 +34,14 @@ def commit():
         msg_string = "auto commit --> default message"
     
     os.system(f'git commit -m "{msg_string}"')
+    push_conf = input("ready to push changes[y/n]: ").lower().strip()
+    if push_conf == "y":
+        time.sleep(1)
+        print("pushing to remote...")
+        os.system("git push")
+    else:
+        print("exiting without pushing.")
+        exit()
 
 if status == 0:
     print("status check successful --> proceeding with git add --all")
