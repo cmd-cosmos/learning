@@ -22,6 +22,25 @@ time.sleep(2)
 status = os.system("git status")
 print("\n\nstatus check: ", status)
 
-# if (status == 0):
-#     print("success")
+proceed = False
 
+def commit():
+    os.system("git add --all")
+    os.system("git commit -m \"auto commit default message\"")
+
+if status == 0:
+    print("status check successful --> proceeding with git add --all")
+    print(f"cwd: {os.getcwd()}")
+    print("confirm add permission to stage all modified files in the cwd.")
+    inp = input("confirm git add --all [y/n]: ")
+    if (inp == 'y'):
+        proceed = True
+        print("proceeding to auto commit sequence.")
+        commit()
+    else:
+        proceed = False
+        print("exiting seq.")
+        exit()
+else:
+    print("failure --> exiting")
+    exit()
