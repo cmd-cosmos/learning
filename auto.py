@@ -42,9 +42,14 @@ def commit():
         print("\ngetting branch status...")
         time.sleep(1)
         os.system("git status")
-        print("clearing screen...")
-        time.sleep(2)
-        os.system("cls")
+        time.sleep(1)
+        clean_flag = input("would you like to clear screen[y/n]: ").lower().strip()
+        if clean_flag == 'y':
+            print("clearing screen...")
+            time.sleep(1)
+            os.system("cls")
+        else:
+            print("\nsequence complete...")
     else:
         print("\nexiting without pushing.")
         time.sleep(1)
