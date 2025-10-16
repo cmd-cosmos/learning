@@ -39,6 +39,9 @@ def commit():
         time.sleep(1)
         print("pushing to remote...")
         os.system("git push")
+        print("\ngetting branch status...")
+        time.sleep(1)
+        os.system("git status")
     else:
         print("exiting without pushing.")
         exit()
