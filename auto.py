@@ -42,8 +42,12 @@ def commit():
         print("\ngetting branch status...")
         time.sleep(1)
         os.system("git status")
+        print("clearing screen...")
+        time.sleep(2)
+        os.system("cls")
     else:
-        print("exiting without pushing.")
+        print("\nexiting without pushing.")
+        time.sleep(1)
         exit()
 
 if status == 0:
