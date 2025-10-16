@@ -26,7 +26,14 @@ proceed = False
 
 def commit():
     os.system("git add --all")
-    os.system("git commit -m \"auto commit default message\"")
+    inp_flag = input("add custom message for the commit[y/n]: ").lower().strip()
+
+    if inp_flag == 'y':
+        msg_string = input("enter custom message: ").strip()
+    else:
+        msg_string = "auto commit --> default message"
+    
+    os.system(f'git commit -m "{msg_string}"')
 
 if status == 0:
     print("status check successful --> proceeding with git add --all")
