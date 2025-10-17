@@ -16,7 +16,7 @@ if len(sys.argv) > 1:
 else:
     print("no target dir passed, using program home dir...\n")
 
-print("-"*25, "Auto Git", "-"*25, '\n')
+print("-"*35, "Auto Git", "-"*35, '\n')
 
 changes_flag = False
 
@@ -26,6 +26,7 @@ def validate_and_status_check():
 
     if check == 0:
         print(".git directory confirmed, proceeding with auto commit sequence.\n")
+        print("-"*70)
     else:
         print("not a git directory")
 
