@@ -62,7 +62,7 @@ if mode and changes_flag:
     proceed = False
 
     def check_remote_and_push():
-        print("checking if remote exists for the current git repo.")
+        print("\nchecking if remote exists for the current git repo.")
         time.sleep(1)
         remote_check = os.system("git remote -v")
         print("remote check: ", remote_check)
@@ -101,7 +101,9 @@ if mode and changes_flag:
         else:
             msg_string = "auto commit --> default message"
 
+        print()
         os.system(f'git commit -m "{msg_string}"')
+        print("-"*70)
         push_conf = input("ready to push changes[y/n]: ").lower().strip()
         if push_conf == "y":
             check_remote_and_push()
@@ -117,7 +119,7 @@ if mode and changes_flag:
         inp = input("confirm git add --all [y/n]: ")
         if (inp == 'y'):
             proceed = True
-            print("proceeding to auto commit sequence...")
+            print("\nproceeding to auto commit sequence...")
             commit()
         else:
             proceed = False
