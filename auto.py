@@ -6,22 +6,30 @@
 
 import time
 import os
+import sys
 # import subprocess
+
+if len(sys.argv) > 1:
+    target_path = sys.argv[1]
+    print(f"target set: {target_path}")
+    os.chdir(target_path)
+else:
+    print("no working dir passed, using program home dir...\n")
 
 print("-"*25, "Auto Git", "-"*25, '\n')
 
 check = os.system("git rev-parse --git-dir")
-print("git repo check: ",check)
+print("git repo check returned: ",check)
 
 if check == 0:
-    print(".git directory confirmed, proceeding with auto commit sequence.")
+    print(".git directory confirmed, proceeding with auto commit sequence.\n")
 else:
     print("not a git directory")
 
 time.sleep(2)
 
 status = os.system("git status")
-print("\n\nstatus check: ", status)
+print("\n\nstatus check return val: ", status)
 
 # stdout_status = subprocess.run(["git", "status"], capture_output=True)
 # print(str(stdout_status.stdout))
