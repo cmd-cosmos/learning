@@ -31,14 +31,23 @@ time.sleep(2)
 status = os.system("git status")
 print("\n\nstatus check return val: ", status)
 
-# stdout_status = subprocess.run(["git", "status"],
-#                                capture_output=True,
-#                                text=True)
-# print(stdout_status.stdout)
+change_check = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+print("Changed files: \n", change_check.stdout)
 
+changes_flag = False
+if bool(change_check.stdout.strip()) == True:
+    time.sleep(1)
+    print("changes found.")
+    print("proceeding with the auto track sequence.\n")
+    changes_flag = True
+else:
+    time.sleep(1)
+    print("no changes found.\nexiting sequence...")
+    time.sleep(1)
+    exit()
 
-mode = 0 # 0 = debug mode, 1 = run mode
-if mode:
+mode = 1 # 0 = debug mode, 1 = run mode
+if mode and changes_flag:
     proceed = False
 
     def check_remote_and_push():
