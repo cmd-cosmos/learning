@@ -16,7 +16,7 @@ if len(sys.argv) > 1:
 else:
     print("no target dir passed, using program home dir...\n")
 
-print("-"*35, "Auto Git", "-"*35, '\n')
+print("-"*30, "Auto Git", "-"*30, '\n')
 
 changes_flag = False
 
@@ -29,11 +29,13 @@ def validate_and_status_check():
         print("-"*70)
     else:
         print("not a git directory")
+        print("-"*70)
 
     time.sleep(2)
     global status
     status = os.system("git status")
-    print("\n\nstatus check return val: ", status)
+    print("-"*70)
+    print("\nstatus check return val: ", status)
 
     change_check = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
     print("Changed files: \n", change_check.stdout)
@@ -51,7 +53,9 @@ def validate_and_status_check():
         exit()
 
 validate_and_status_check()
-print(f"validation and status bit: {changes_flag}\n") 
+print("-"*70)
+print(f"validation and status bit: {changes_flag}") 
+print("-"*70)
 
 mode = 1 # 0 = debug mode, 1 = run mode
 if mode and changes_flag:
