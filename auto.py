@@ -18,33 +18,39 @@ else:
 
 print("-"*25, "Auto Git", "-"*25, '\n')
 
-check = os.system("git rev-parse --git-dir")
-print("git repo check returned: ",check)
-
-if check == 0:
-    print(".git directory confirmed, proceeding with auto commit sequence.\n")
-else:
-    print("not a git directory")
-
-time.sleep(2)
-
-status = os.system("git status")
-print("\n\nstatus check return val: ", status)
-
-change_check = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
-print("Changed files: \n", change_check.stdout)
-
 changes_flag = False
-if bool(change_check.stdout.strip()) == True:
-    time.sleep(1)
-    print("changes found.")
-    print("proceeding with the auto track sequence.\n")
-    changes_flag = True
-else:
-    time.sleep(1)
-    print("no changes found.\nexiting sequence...")
-    time.sleep(1)
-    exit()
+
+def validate_and_status_check():
+    check = os.system("git rev-parse --git-dir")
+    print("git repo check returned: ",check)
+
+    if check == 0:
+        print(".git directory confirmed, proceeding with auto commit sequence.\n")
+    else:
+        print("not a git directory")
+
+    time.sleep(2)
+    global status
+    status = os.system("git status")
+    print("\n\nstatus check return val: ", status)
+
+    change_check = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+    print("Changed files: \n", change_check.stdout)
+
+    if bool(change_check.stdout.strip()) == True:
+        time.sleep(1)
+        print("changes found.")
+        print("proceeding with the auto track sequence.\n")
+        global changes_flag
+        changes_flag = not changes_flag
+    else:
+        time.sleep(1)
+        print("no changes found.\nexiting sequence...")
+        time.sleep(1)
+        exit()
+
+validate_and_status_check()
+print(f"validation and status bit: {changes_flag}\n") 
 
 mode = 1 # 0 = debug mode, 1 = run mode
 if mode and changes_flag:
