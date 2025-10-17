@@ -72,6 +72,7 @@ if mode and changes_flag:
             time.sleep(1)
             os.system("git push")
             time.sleep(1)
+            print("-"*70)
             print("\ngetting branch status...")
             time.sleep(1)
             os.system("git status")
