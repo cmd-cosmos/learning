@@ -77,6 +77,8 @@ if mode and changes_flag:
             time.sleep(1)
             os.system("git status")
             time.sleep(1)
+            print("-"*70)
+
             clean_flag = input("would you like to clear screen[y/n]: ").lower().strip()
             if clean_flag == 'y':
                 print("clearing screen...")
@@ -111,11 +113,11 @@ if mode and changes_flag:
     if status == 0:
         print("status check successful --> proceeding with git add --all")
         print(f"cwd: {os.getcwd()}")
-        print("confirm add permission to stage all modified files in the cwd.")
+        print("\nconfirm add permission to stage all modified files in the cwd.")
         inp = input("confirm git add --all [y/n]: ")
         if (inp == 'y'):
             proceed = True
-            print("proceeding to auto commit sequence.")
+            print("proceeding to auto commit sequence...")
             commit()
         else:
             proceed = False
