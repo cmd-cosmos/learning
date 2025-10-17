@@ -7,14 +7,14 @@
 import time
 import os
 import sys
-# import subprocess
+import subprocess
 
 if len(sys.argv) > 1:
     target_path = sys.argv[1]
     print(f"target set: {target_path}")
     os.chdir(target_path)
 else:
-    print("no working dir passed, using program home dir...\n")
+    print("no target dir passed, using program home dir...\n")
 
 print("-"*25, "Auto Git", "-"*25, '\n')
 
@@ -31,10 +31,13 @@ time.sleep(2)
 status = os.system("git status")
 print("\n\nstatus check return val: ", status)
 
-# stdout_status = subprocess.run(["git", "status"], capture_output=True)
-# print(str(stdout_status.stdout))
+# stdout_status = subprocess.run(["git", "status"],
+#                                capture_output=True,
+#                                text=True)
+# print(stdout_status.stdout)
 
-mode = 1 # 0 = debug mode, 1 = run mode
+
+mode = 0 # 0 = debug mode, 1 = run mode
 if mode:
     proceed = False
 
