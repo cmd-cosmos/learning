@@ -86,7 +86,7 @@ def modified_file_getter():
     if file_inp in range(len(splitter)):
         print(f"selecting: {splitter[file_inp]}")
         os.system(f"git add {splitter[file_inp]}")
-        commit(mode=2)
+        commit(add_mode=2)
     else:
         print("index out of range...")
         sys.exit()
@@ -135,14 +135,14 @@ if MODE and CHANGES_FLAG:
             time.sleep(1)
             sys.exit()
 
-    def commit(mode):
+    def commit(add_mode):
         '''
         proceed with git commit sequence after git add returns and user passes custom message 
         otherwise goes with the default version
         '''
-        if mode == 1:
+        if add_mode == 1:
             os.system("git add --all")
-        elif mode == 2:
+        elif add_mode == 2:
             pass
         print("\nFetching status...")
         os.system("git status")
@@ -173,7 +173,7 @@ if MODE and CHANGES_FLAG:
         if inp == 'y':
             PROCEED = True
             print("\nproceeding to auto commit sequence...")
-            commit(mode=1)
+            commit(add_mode=1)
         elif inp == "n":
             specific_inp = input("would you like to add specific files[y/n]: ")
             if specific_inp == "y":
@@ -181,7 +181,9 @@ if MODE and CHANGES_FLAG:
                 modified_file_getter()
             else:
                 PROCEED = False
-                print("exiting seq.")
+                print("-"*70)
+                print("terminating process ---> exiting seq.")
+                time.sleep(1)
                 sys.exit()
     else:
         print("failure --> exiting")
