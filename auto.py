@@ -2,7 +2,6 @@
 # git status
 # git add
 # git commit
-# all in 1
 
 # type: ignore
 # pylint ignores ---> ignore globals whitespace in multiline function calls
