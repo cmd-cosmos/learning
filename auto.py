@@ -3,11 +3,16 @@
 # git add
 # git commit
 # all in 1
+#fmt: off
+# type: ignore
 
 import time
 import os
 import sys
 import subprocess
+
+status = None
+
 
 if len(sys.argv) > 1:
     target_path = sys.argv[1]
