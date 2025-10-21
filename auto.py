@@ -3,16 +3,20 @@
 # git add
 # git commit
 # all in 1
-#fmt: off
+
 # type: ignore
+# pylint ignores ---> ignore globals whitespace in multiline function calls
+# pylint: disable=global-statement
+# pylint: disable=C0303
 
 import time
 import os
 import sys
 import subprocess
 
-status = None
-
+# init global vars to none
+STATUS = None
+CHANGES_FLAG = None
 
 if len(sys.argv) > 1:
     target_path = sys.argv[1]
@@ -23,9 +27,12 @@ else:
 
 print("-"*30, "Auto Git", "-"*30, '\n')
 
-changes_flag = False
+CHANGES_FLAG = False
 
 def validate_and_status_check():
+    '''
+    validation sequence to ensure git repo exists before checking for repo status.
+    '''
     check = os.system("git rev-parse --git-dir")
     print("git repo check returned: ",check)
 
@@ -37,36 +44,42 @@ def validate_and_status_check():
         print("-"*70)
 
     time.sleep(2)
-    global status
-    status = os.system("git status")
+    global STATUS #ignore : warning
+    STATUS = os.system("git status")
     print("-"*70)
-    print("\nstatus check return val: ", status)
+    print("\nstatus check return val: ", STATUS)
 
-    change_check = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+    change_check = subprocess.run(["git", "status", "--porcelain"],
+                                  capture_output=True, text=True, check=False)
+    
     print("Changed files: \n", change_check.stdout)
 
-    if bool(change_check.stdout.strip()) == True:
+    if bool(change_check.stdout.strip()) is True:
         time.sleep(1)
         print("changes found.")
         print("proceeding with the auto track sequence.\n")
-        global changes_flag
-        changes_flag = not changes_flag
+        global CHANGES_FLAG
+        CHANGES_FLAG = not CHANGES_FLAG
     else:
         time.sleep(1)
         print("no changes found.\nexiting sequence...")
         time.sleep(1)
-        exit()
+        sys.exit()
 
 validate_and_status_check()
 print("-"*70)
-print(f"validation and status bit: {changes_flag}") 
+print(f"validation and status bit: {CHANGES_FLAG}") 
 print("-"*70)
 
-mode = 1 # 0 = debug mode, 1 = run mode
-if mode and changes_flag:
-    proceed = False
+MODE = 1 # 0 = debug mode, 1 = run mode
+if MODE and CHANGES_FLAG:
+    PROCEED = False
 
     def check_remote_and_push():
+        '''
+        check if remote exists and push if remote found
+        '''
+
         print("\nchecking if remote exists for the current git repo.")
         time.sleep(1)
         remote_check = os.system("git remote -v")
@@ -95,9 +108,13 @@ if mode and changes_flag:
             print("no remote found...")
             print("exiting sequence without pushing to remote....")
             time.sleep(1)
-            exit()
+            sys.exit()
 
     def commit():
+        '''
+        proceed with git commit sequence after git add returns and user passes custom message 
+        otherwise goes with the default version
+        '''
         os.system("git add --all")
         inp_flag = input("add custom message for the commit[y/n]: ").lower().strip()
 
@@ -115,21 +132,21 @@ if mode and changes_flag:
         else:
             print("\nexiting without pushing.")
             time.sleep(1)
-            exit()
+            sys.exit()
 
-    if status == 0:
+    if STATUS == 0:
         print("status check successful --> proceeding with git add --all")
         print(f"cwd: {os.getcwd()}")
         print("\nconfirm add permission to stage all modified files in the cwd.")
         inp = input("confirm git add --all [y/n]: ")
-        if (inp == 'y'):
-            proceed = True
+        if inp == 'y':
+            PROCEED = True
             print("\nproceeding to auto commit sequence...")
             commit()
         else:
-            proceed = False
+            PROCEED = False
             print("exiting seq.")
-            exit()
+            sys.exit()
     else:
         print("failure --> exiting")
-        exit()
+        sys.exit()
