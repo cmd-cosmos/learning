@@ -21,13 +21,26 @@ print(bat2)
 STATUS = None
 CHANGES_FLAG = None
 
+def git_root_getter(start=None):
+    ''' get git root '''
+    try:
+        res = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True, cwd=start, check=True)
+        return res.stdout.strip() 
+    except subprocess.CalledProcessError:
+        print("Not a git repo")
+        sys.exit()
+
 if len(sys.argv) > 1:
     target_path = sys.argv[1]
     print(f"target set: {target_path}\n")
-    os.chdir(target_path)
 else:
+    target_path = os.getcwd()
     print("no target dir passed, using program home dir...\n")
-    print(os.curdir)
+    print(f"target set: {target_path}")
+
+git_root = git_root_getter(target_path)
+print(f"git root established: {git_root}")
+os.chdir(git_root)
 
 print("-"*30, "Auto Git", "-"*30, '\n')
 
@@ -75,10 +88,19 @@ def modified_file_getter():
     change_check = subprocess.run(["git", "status", "--porcelain"],
                                   capture_output=True, text=True, check=False)    
     file_tracker = change_check.stdout
+
+    file_tracker_lst = file_tracker.split('\n')
+    
+    if '' in file_tracker_lst:
+        file_tracker_lst.remove('')
+    # print(file_tracker_lst)
+    
+    # strip the path if called other files from separate directory
+    splitter = [os.path.abspath(member[2:].strip()) for member in file_tracker_lst]
+    # print(splitter)
+
     print(f"Changed files:\n{file_tracker}")
     print("-"*70)
-    splitter = file_tracker.split(" M ")
-    splitter.remove('')
     print("idx : filename\n")
     for i,mod_file in enumerate(splitter):
         print(f"{i} : {mod_file.rstrip()}")
