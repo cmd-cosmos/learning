@@ -13,6 +13,9 @@ import time
 import os
 import sys
 import subprocess
+from art import bat2
+
+print(bat2)
 
 # init global vars to none
 STATUS = None
@@ -116,6 +119,10 @@ if MODE and CHANGES_FLAG:
         otherwise goes with the default version
         '''
         os.system("git add --all")
+        print("\nFetching status...")
+        status_check = os.system("git status")
+        print(status_check)
+
         inp_flag = input("add custom message for the commit[y/n]: ").lower().strip()
 
         if inp_flag == 'y':
