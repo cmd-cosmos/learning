@@ -20,7 +20,7 @@ CHANGES_FLAG = None
 
 if len(sys.argv) > 1:
     target_path = sys.argv[1]
-    print(f"target set: {target_path}")
+    print(f"target set: {target_path}\n")
     os.chdir(target_path)
 else:
     print("no target dir passed, using program home dir...\n")
