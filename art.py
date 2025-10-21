@@ -1,7 +1,6 @@
 ## some ascii art to integrate with the auto git project for gun
 #pylint: skip-file
 
-
 # https://asciiart.website/art/1272
 bat1 = r'''
               ..oo$00ooo..                    ..ooo00$oo..
