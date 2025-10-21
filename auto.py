@@ -55,7 +55,16 @@ def validate_and_status_check():
     change_check = subprocess.run(["git", "status", "--porcelain"],
                                   capture_output=True, text=True, check=False)
     
-    print("Changed files: \n", change_check.stdout)
+    file_tracker = change_check.stdout
+    print(f"Changed files:\n{file_tracker}")
+
+    print(type(file_tracker))
+    print(file_tracker)
+    splitter = file_tracker.split(" M ")
+    splitter.remove('')
+    for i,mod_file in enumerate(splitter):
+        print(f"{i} : {mod_file.rstrip()}")
+    print(splitter)
 
     if bool(change_check.stdout.strip()) is True:
         time.sleep(1)
@@ -120,8 +129,7 @@ if MODE and CHANGES_FLAG:
         '''
         os.system("git add --all")
         print("\nFetching status...")
-        status_check = os.system("git status")
-        print(status_check)
+        os.system("git status")
 
         inp_flag = input("add custom message for the commit[y/n]: ").lower().strip()
 
