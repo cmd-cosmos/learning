@@ -20,3 +20,15 @@ print("a == b ==> ",a == b) # compares object vals
 c = "".join(["Bat", "man"])
 print(a is c) # false ---> join operation happens at runtime so objs mapped separately
 print(a == c) # true ---> val of both objects is the same
+print("-"*10)
+d = "Bat" + "man"
+# string literal concat happens at compile time so objects can be interned
+print(a is d) # true
+print(a == d) # true 
+
+# string variable concat happens at runtime so interning not performed
+print("-"*10)
+e = "Bat"
+f = e + "man"
+print(a is f)
+print(a == f)
