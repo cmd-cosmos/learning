@@ -51,7 +51,7 @@ def validate_and_status_check():
     global STATUS #ignore : warning
     STATUS = os.system("git status")
     print("-"*70)
-    print("\nstatus check return val: ", STATUS)
+    print("status check return val: ", STATUS)
 
     command = subprocess.run(["git", "status", "--porcelain"],
                                   capture_output=True, text=True, check=False)   
@@ -59,7 +59,7 @@ def validate_and_status_check():
     if bool(command.stdout.strip()) is True:
         time.sleep(1)
         print("changes found.")
-        print("proceeding with the auto track sequence.\n")
+        print("proceeding with the auto track sequence.")
         global CHANGES_FLAG
         CHANGES_FLAG = not CHANGES_FLAG
     else:
@@ -168,7 +168,7 @@ if MODE and CHANGES_FLAG:
             sys.exit()
 
     if STATUS == 0:
-        print("status check successful --> proceeding with git add --all")
+        print("status check successful --> proceeding with git add sequence")
         print(f"cwd: {os.getcwd()}")
         print("\nconfirm add permission to stage all modified files in the cwd.")
         inp = input("confirm git add --all [y/n]: ")
