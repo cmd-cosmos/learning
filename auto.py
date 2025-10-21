@@ -7,6 +7,7 @@
 # pylint ignores ---> ignore globals whitespace in multiline function calls
 # pylint: disable=global-statement
 # pylint: disable=C0303
+# pylint: disable=C0114
 
 import time
 import os
@@ -26,6 +27,7 @@ if len(sys.argv) > 1:
     os.chdir(target_path)
 else:
     print("no target dir passed, using program home dir...\n")
+    print(os.curdir)
 
 print("-"*30, "Auto Git", "-"*30, '\n')
 
