@@ -52,21 +52,10 @@ def validate_and_status_check():
     print("-"*70)
     print("\nstatus check return val: ", STATUS)
 
-    change_check = subprocess.run(["git", "status", "--porcelain"],
-                                  capture_output=True, text=True, check=False)
-    
-    file_tracker = change_check.stdout
-    print(f"Changed files:\n{file_tracker}")
+    command = subprocess.run(["git", "status", "--porcelain"],
+                                  capture_output=True, text=True, check=False)   
 
-    print(type(file_tracker))
-    print(file_tracker)
-    splitter = file_tracker.split(" M ")
-    splitter.remove('')
-    for i,mod_file in enumerate(splitter):
-        print(f"{i} : {mod_file.rstrip()}")
-    print(splitter)
-
-    if bool(change_check.stdout.strip()) is True:
+    if bool(command.stdout.strip()) is True:
         time.sleep(1)
         print("changes found.")
         print("proceeding with the auto track sequence.\n")
@@ -76,6 +65,31 @@ def validate_and_status_check():
         time.sleep(1)
         print("no changes found.\nexiting sequence...")
         time.sleep(1)
+        sys.exit()
+
+def modified_file_getter():
+    '''
+    get list of modified files after a git status check
+    '''
+    change_check = subprocess.run(["git", "status", "--porcelain"],
+                                  capture_output=True, text=True, check=False)    
+    file_tracker = change_check.stdout
+    print(f"Changed files:\n{file_tracker}")
+    print("-"*70)
+    splitter = file_tracker.split(" M ")
+    splitter.remove('')
+    print("idx : filename\n")
+    for i,mod_file in enumerate(splitter):
+        print(f"{i} : {mod_file.rstrip()}")
+    print()
+
+    file_inp = int(input("enter index of file to stage: "))
+    if file_inp in range(len(splitter)):
+        print(f"selecting: {splitter[file_inp]}")
+        os.system(f"git add {splitter[file_inp]}")
+        commit(mode=2)
+    else:
+        print("index out of range...")
         sys.exit()
 
 validate_and_status_check()
@@ -122,12 +136,15 @@ if MODE and CHANGES_FLAG:
             time.sleep(1)
             sys.exit()
 
-    def commit():
+    def commit(mode):
         '''
         proceed with git commit sequence after git add returns and user passes custom message 
         otherwise goes with the default version
         '''
-        os.system("git add --all")
+        if mode == 1:
+            os.system("git add --all")
+        elif mode == 2:
+            pass
         print("\nFetching status...")
         os.system("git status")
 
@@ -157,11 +174,16 @@ if MODE and CHANGES_FLAG:
         if inp == 'y':
             PROCEED = True
             print("\nproceeding to auto commit sequence...")
-            commit()
-        else:
-            PROCEED = False
-            print("exiting seq.")
-            sys.exit()
+            commit(mode=1)
+        elif inp == "n":
+            specific_inp = input("would you like to add specific files[y/n]: ")
+            if specific_inp == "y":
+                print("Select index of file you want to add...")
+                modified_file_getter()
+            else:
+                PROCEED = False
+                print("exiting seq.")
+                sys.exit()
     else:
         print("failure --> exiting")
         sys.exit()
