@@ -18,11 +18,17 @@ class Multiprogramming:
     def submitJobs(self):
         for job in self.job_list:
             print("Submitted: ", job)
+        print("-"*70)
     
     async def runJob(self, job):
         print("Starting:  ", job)
+        print("-"*70)
         await asyncio.sleep(job.waitTime)
         print("Completed: ", job)
+        print("#"*70)
+
+    async def runMultiProgSys(self):
+        await asyncio.gather(*(self.runJob(job) for job in job_list))
     
 class Multitasking(Multiprogramming):
     def __init__(self, num_jobs, job_list, user) -> None:
@@ -46,4 +52,8 @@ j4 = Job(id=4, waitTime=3)
 j5 = Job(id=5, waitTime=10)
 
 job_list = [j1, j2, j3, j4, j5]
+
+operSys = Multiprogramming(num_jobs=len(job_list), job_list=job_list)
+operSys.submitJobs()
+asyncio.run(operSys.runMultiProgSys())
 
