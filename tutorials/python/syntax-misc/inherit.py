@@ -5,7 +5,10 @@ import asyncio
 class Job:
     def __init__(self, id, waitTime) -> None:
         self.id = id
-        self.waitTime = waitTime        
+        self.waitTime = waitTime
+
+    def __repr__(self) -> str:
+        return f"Job(id={self.id}, waitTime={self.waitTime})"        
 
 class Multiprogramming:
     def __init__(self, num_jobs, job_list) -> None:
@@ -16,11 +19,11 @@ class Multiprogramming:
         for job in self.job_list:
             print("Submitted: ", job)
     
-    async def runMultiProgSys(self):
-        for job in self.job_list:
-            print("running job 1")
-        
-
+    async def runJob(self, job):
+        print("Starting:  ", job)
+        await asyncio.sleep(job.waitTime)
+        print("Completed: ", job)
+    
 class Multitasking(Multiprogramming):
     def __init__(self, num_jobs, job_list, user) -> None:
         super().__init__(num_jobs, job_list)
