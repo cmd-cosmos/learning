@@ -5,6 +5,7 @@
 #                           ^                                |
 #                           |--- BLOCKED STATE <-IO/ wait<--|
 
+from typing import Optional
 
 class PCB:
     state_map = {
@@ -30,7 +31,7 @@ class Process:
     pidCounter = 0
 
     def __init__(self) -> None:
-        self.pcb = None
+        self.pcb : PCB
 
     def createProcess(self):
         Process.pidCounter += 1
