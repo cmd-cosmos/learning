@@ -6,6 +6,7 @@
 #                           |--- BLOCKED STATE <-IO/ wait<--|
 
 from typing import Optional
+import time
 
 class PCB:
     state_map = {
@@ -44,8 +45,32 @@ class Process:
 
     def dispatch(self):
         self.pcb.setState(3) if self.pcb.state == 2 else print("Cannot dispatch process until ")
-    
 
+    def ioWait(self, flag):
+        # flag == 1 indicates ioWait enabled
+        if self.pcb.state == 3 and flag == 1:
+            self.pcb.setState(4)
+            time.sleep(2)
+            self.admit()
+            flag = 0
+            if flag == 0:
+                print("IO wait ---> READY")
+
+        elif flag == 0 and self.pcb.state == 3:
+            # Exit without io wait
+            print(f"LOG_PID: {self.pidCounter} | IO WAIT NOT REQUIRED")
+            self.pcb.setState(5)
+        else:
+            print("Not Blockable at the monment")
+
+    
+        
+    
+p1 = Process()
+
+p1.createProcess()
+p1.dispatch()
+p1.ioWait(0)
 
 
 
