@@ -54,11 +54,13 @@ class Process:
             self.admit()
             flag = 0
             if flag == 0:
-                print("IO wait ---> READY")
+                self.dispatch()
+                self.pcb.setState(5)
+
 
         elif flag == 0 and self.pcb.state == 3:
             # Exit without io wait
-            print(f"LOG_PID: {self.pidCounter} | IO WAIT NOT REQUIRED")
+            print(f"PID: {self.pidCounter} | IO WAIT NOT REQUIRED")
             self.pcb.setState(5)
         else:
             print("Not Blockable at the monment")
@@ -70,7 +72,7 @@ p1 = Process()
 
 p1.createProcess()
 p1.dispatch()
-p1.ioWait(0)
+p1.ioWait(1)
 
 
 
