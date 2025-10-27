@@ -1,5 +1,8 @@
 #pylint: skip-file
 
+# each call to the make multiplier function return a new inner function which remembers its own factor
+# allows function factories and stateful decorators
+
 def log(msg):
     print(f"LOG: {msg}")
 
