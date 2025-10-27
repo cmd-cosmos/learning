@@ -29,6 +29,8 @@ class PCB:
             print(f"PID: {self.pid} | Invalid Transition Request")
 
 class Process:
+    # _instance = 0
+    # processQueue = []
     pidCounter = 0
 
     def __init__(self) -> None:
@@ -46,16 +48,18 @@ class Process:
     def dispatch(self):
         self.pcb.setState(3) if self.pcb.state == 2 else print("Cannot dispatch process until ")
 
+    # def enqueue(self):
+    #     if self._instance >= 1:
+    #         self.processQueue.append()
+
     def ioWait(self, flag):
         # flag == 1 indicates ioWait enabled
         if self.pcb.state == 3 and flag == 1:
             self.pcb.setState(4)
             time.sleep(2)
             self.admit()
-            flag = 0
-            if flag == 0:
-                self.dispatch()
-                self.pcb.setState(5)
+            self.dispatch()
+            self.pcb.setState(5)
 
 
         elif flag == 0 and self.pcb.state == 3:
