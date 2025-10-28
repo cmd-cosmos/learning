@@ -1,7 +1,9 @@
 # pylint: skip-file
 
+
 # iterator --> obj represents a data stream
 # 2 dunder methods implemented --> iter and next
+# any class that implements the 2 said methods will automatically be classified as an iterator object 
 
 class CounterUP:
     def __init__(self, bound) -> None:
