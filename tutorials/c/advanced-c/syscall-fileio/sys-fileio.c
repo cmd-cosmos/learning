@@ -1,4 +1,7 @@
 // using system calls to perform file operations
+
+// on windows these POSIX syscalls act as wrappers for the winapi provided syscalls.
+// C runtime like msvcrt is responsible to translate these POSIX syscalls to win syscalls 
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
