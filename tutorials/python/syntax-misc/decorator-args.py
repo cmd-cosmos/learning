@@ -13,7 +13,11 @@ def repeat(times):
 def greet():
     print("I am Batman")
 
-greet()
+greet() # resolved to repeat(3)(greet)
+
+# repeat(3) returns decorator
+# decorator(greet) returns wrapper
+# greet = wrapper()
 
 # outer function --> receives args for the decorator
 # middle function --> receives func being decorated
