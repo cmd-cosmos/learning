@@ -1,0 +1,23 @@
+# C abstract machine
+
+- C does not run directly on the CPU
+- it defines code behavior on a theoretical machine
+- compiler maps the abstract behavior to the actual hardware
+- each var in C refers to an obj
+- object is a region of data storage big enough to hold a val of some type
+- characteristics of objects:
+    - type             => determines interpretation of bits
+    - value            => stored data
+    - lifetime         => when the obj exists in memory
+    - storage duration => static, automatic and dynamic
+
+- storage duration ==> automatics, static, thread, dynamic
+
+- automatic storage duration - when control block entered - usually on the stack but can be optimized by the compiler to be put in a register.
+
+- static duration  ==>  scope not bounded to lexical declaration location
+    |--> it is retained in storage for the duration of the program
+
+- if static declaration in a function ==> scope is limited to the local scope i.e. function but the duration is the whole execution time. No linkage at all
+- if static in the global scope ==> scope is the translation unit with internal linkage so cannot be used inside a different c file.
+- use extern to allow other translation units access to the obj.
