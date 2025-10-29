@@ -27,3 +27,16 @@
 
 - global static int is not inherently thread safe. 
 - if read write by multiple threads then use mutex or atomic opers to ensure thread safety 
+
+# lvals and rvals - locator values and read values
+- lval(on the left of the =), rval(to the right of =)
+- rvals are temp and not identifiable objects.
+- when used in an operation --> lval converted to rval
+
+# sequence points/ eval order
+- helps prevent undefined behavior
+- from C17  -> compiler decides the order unless defined explicitly
+- eg) i = i++ + 1 <--- undefined behavior as i eval and upd twice
+- operator precedence(defines grouping of operators) and order of eval are different
+- C standard forbids obj mod more than once without a seq pt between mods.
+
