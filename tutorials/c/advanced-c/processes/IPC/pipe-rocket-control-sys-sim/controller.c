@@ -85,7 +85,7 @@ int main()
 
         SensorData receivedData;
         ReadFile(hReaderToControllerRead, &receivedData, sizeof(SensorData), &readBytes, NULL);
-        printf("Reader Child --> Controller ==> READINGS: (TEMP: %.2f, PRES: %.2f, ALT: %.2f, VEL: %.2f\n)",\
+        printf("Reader Child --> Controller ==> READINGS: (TEMP: %.2f, PRES: %.2f, ALT: %.2f, VEL: %.2f)\n",\
         receivedData.temperature,
         receivedData.pressure,
         receivedData.altitude,
