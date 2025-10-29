@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int glob = 42; // not thread safe , can cause race conditions.
+
 void increment()
 {
     static int x = 0; // retains data after frame collapse
     int y = 0;        // data deleted when frame collapses
 
-    printf("static_duration x: %d, auto_duration y: %d\n", x++,y++);
+    printf("static_duration x: %d, auto_duration y: %d, global_decl: %d\n", x++,y++, glob++);
 }
 
 int main(int argc, char* argv[])
@@ -20,6 +22,10 @@ int main(int argc, char* argv[])
     {
         increment();
     }
+
+    // lvals and rvals
+    int num = 1000; // 
+    int numCopy = num;
     
 
     return 0;
