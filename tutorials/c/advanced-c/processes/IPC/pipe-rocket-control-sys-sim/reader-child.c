@@ -25,21 +25,21 @@ int main()
         printf("CONTROLLER --> READER ==> COMMAND: %s\n", command);
 
         SensorData data;
-        if (strcmp(command, "IDLE" == 0))
+        if (strcmp(command, "IDLE") == 0)
         {
             data.temperature = 10.0;
             data.pressure = 120.0;
             data.altitude = 0.0;
             data.velocity = 0.0;
         }
-        else if (strcmp(command, "LAUNCH" == 0))
+        else if (strcmp(command, "LAUNCH") == 0)
         {
             data.temperature = 13.0;
             data.pressure = 200.0;
             data.altitude = 10.0;
             data.velocity = 200.0;
         }
-        else if (strcmp(command, "LAND" == 0))
+        else if (strcmp(command, "LAND") == 0)
         {
             data.temperature = 20.0;
             data.pressure = 180.0;
