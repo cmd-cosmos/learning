@@ -21,3 +21,9 @@
 - if static declaration in a function ==> scope is limited to the local scope i.e. function but the duration is the whole execution time. No linkage at all
 - if static in the global scope ==> scope is the translation unit with internal linkage so cannot be used inside a different c file.
 - use extern to allow other translation units access to the obj.
+
+- a regular global obj declaration has external linkage.
+- only when static global decl --> internal linkage enforced.
+
+- global static int is not inherently thread safe. 
+- if read write by multiple threads then use mutex or atomic opers to ensure thread safety 
