@@ -1,4 +1,5 @@
 #pylint: skip-file
+import sys
 
 # string interning --> also called string pooling
 #                  --> resuse identical immutable strings in mem to optimize mem alloc
@@ -32,3 +33,16 @@ e = "Bat"
 f = e + "man"
 print(a is f)
 print(a == f)
+
+# manual string interning
+print("-"*10)
+
+x = "".join(["Bat", "man"])
+y = "".join(["Bat", "man"]) 
+
+print(x is y) # false as string joined at runtime
+
+x = sys.intern(x)
+y = sys.intern(y)
+
+print(x is y) # forcing interning
