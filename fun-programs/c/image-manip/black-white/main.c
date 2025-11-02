@@ -61,8 +61,55 @@ int main()
     }
 
     printf("BMP file validated.\n");
-    printf("signature: 0x%hx", header.signature);
+    printf("signature: 0x%hx\n", header.signature);
+    printf("Width: %d px\n", info.width);
+    printf("height: %d px\n", info.height);
+    printf("Bits per pixel: %d\n", info.bits_per_pixel);
+    printf("pixel data start offset: %d\n", header.offset);
+
+    printf("\nConverting input image to black and white.\n");
+
+    FILE *fout = fopen("out.bmp", "wb");
+
+    if (!fout)
+    {
+        printf("error - could not create output image.\n");
+        fclose(fInp);
+        return EXIT_FAILURE;
+    }
+
+    fwrite(&header, sizeof(BMPHeader), 1, fout);
+    fwrite(&info, sizeof(BMPinfoHeader), 1, fout);
+
+    int width = info.width;
+    int height = info.height;
+
+    int padding = (4 - (width*3) % 4) % 4; // add padding only if row not a multiple of 4
+
+    RGB pixel;
+    for (int y = 0; y < height; y++) // go through all rows(height of the image) but by columns(width)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            fread(&pixel, sizeof(RGB) - 1, 1, fInp); // reads 3 bytes at once
+
+            unsigned char gray = (unsigned char)(0.299 * pixel.red + 0.587 * (pixel.green) + 0.114 * (pixel.blue));
+
+            pixel.red = pixel.green = pixel.blue = gray;
+
+            fwrite(&pixel, sizeof(RGB) - 1, 1, fout);
+        }
+        fseek(fInp, padding, SEEK_CUR);
+    }
+    fseek(fInp, padding, SEEK_CUR);
+
+    for(int pad = 0; pad < padding; pad++)
+    {
+        fputc(0x00, fout);
+    }
+
     fclose(fInp);
+    fclose(fout);
 
     return 0;
 }
