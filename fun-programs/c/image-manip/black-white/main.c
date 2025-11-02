@@ -12,6 +12,7 @@
 #pragma pack(push, 1)
 typedef struct
 {
+    // valid header signature (magic number) for a standard BMP file consists of two bytes: 0x42 0x4D <<--- from google
     unsigned short signature; // 2 bytes
     unsigned int size;        // 4 bytes
     unsigned int reserved;    // 4 bytes
@@ -34,11 +35,34 @@ typedef struct
     unsigned char red;
     unsigned char res;  // set to 0x00 --> unused 4th byte
 }RGB; // color table --> 4 bytes
+#pragma pack(pop)
 
 
 int main()
 {
+    FILE *fInp = fopen("testImage.bmp", "rb");
+    if (!fInp)
+    {
+        printf("Could not open file.");
+        return EXIT_FAILURE;
+    }
 
+    BMPHeader header;
+    BMPinfoHeader info;
+
+    fread(&header, sizeof(BMPHeader), 1, fInp);
+    fread(&info, sizeof(BMPinfoHeader), 1, fInp);
+
+    if (header.signature != 0x4D42)
+    {
+        printf("not a valid BMP file");
+        fclose(fInp);
+        return EXIT_FAILURE;
+    }
+
+    printf("BMP file validated.\n");
+    printf("signature: 0x%hx", header.signature);
+    fclose(fInp);
 
     return 0;
 }
