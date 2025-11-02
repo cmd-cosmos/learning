@@ -1,4 +1,7 @@
+// WORKS ONLY FOR BMP FILES
 // using BMP file format to manipulate at the pixel level
+
+
 // BMP header --> https://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/2003_w/misc/bmp_file_format/bmp_file_format.htm
 
 
@@ -13,7 +16,7 @@ typedef struct
     unsigned int size;        // 4 bytes
     unsigned int reserved;    // 4 bytes
     unsigned int offset;      // 4 bytes
-} BMPHeader; // bitmap header format
+} BMPHeader; // header --> 14 bytes
 
 typedef struct
 {
@@ -21,15 +24,16 @@ typedef struct
     unsigned short planes, bits_per_pixel;
     unsigned int compression, imagesize, XpixelsPerM, YpixelsPerM;
     unsigned int colors, impColors;
-} BMPinfoHeader;
+} BMPinfoHeader; // info header --> 40 bytes
 
 typedef struct
 {
-    unsigned char red;
-    unsigned char green;
+    // BMP color table stores in the blue --> green --> red order for each entry 
     unsigned char blue;
-    unsigned char res;
-}RGB; // color table
+    unsigned char green;
+    unsigned char red;
+    unsigned char res;  // set to 0x00 --> unused 4th byte
+}RGB; // color table --> 4 bytes
 
 
 int main()
