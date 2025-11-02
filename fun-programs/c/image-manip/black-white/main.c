@@ -21,7 +21,7 @@ typedef struct
     unsigned short planes, bits_per_pixel;
     unsigned int compression, imagesize, XpixelsPerM, YpixelsPerM;
     unsigned int colors, impColors;
-};
+} BMPinfoHeader;
 
 typedef struct
 {
