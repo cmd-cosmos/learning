@@ -4,6 +4,9 @@
 
 // BMP header --> https://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/2003_w/misc/bmp_file_format/bmp_file_format.htm
 
+// standard RGB to Grayscale conversion using the weighted method
+// Grayscale = 0.299R + 0.587G + 0.114B
+
 
 #include <stdio.h>
 #include <stdlib.h>
