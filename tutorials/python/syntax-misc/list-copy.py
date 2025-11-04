@@ -13,10 +13,12 @@ print("l2: ", id(l2))
 l3 = l1.copy()
 print("l3: ", id(l3))
 
+# shallow nature not visible here as ints are immutable
 l3.append(6)
 print(l1) # [1, 2, 3]
 print(l3) # [1, 2, 3, 6]
 
+# shallow nature of .copy() visible here as lists as elements are mutable so both list objs are modified when we append something to the child list
 l4 = [[1,2,3], [1,2,3,4,5]]
 l5 = l4.copy()
 print(l4)
