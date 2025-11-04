@@ -34,3 +34,20 @@ print(l5)
 # [[1, 2, 3, 2000], [1, 2, 3, 4, 5]]
 # [[1, 2, 3, 2000], [1, 2, 3, 4, 5]]
 
+
+#############################################################################
+
+# deep copies
+import copy
+
+print('-'*70)
+lp = [[1,2,3], [1,2,3,4,5]]
+lc = copy.deepcopy(lp)
+# .deepcopy recursively copies all objs
+
+print(lp)
+print(lc)
+
+lc[0].append(100000)
+print(lp)
+print(lc)
