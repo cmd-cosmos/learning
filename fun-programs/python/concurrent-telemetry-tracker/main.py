@@ -16,8 +16,8 @@ def telemetry_log_daemon(sat_id):
             timestamp = time.ctime()
 
             telemetry = (
-                f"{timestamp} | Satellite ID: {sat_id} |"
-                f"POS: {pos}  | VEL: {vel:.2f} km/s    |\n"
+                f"{timestamp} -> Satellite ID: {sat_id} |"
+                f"POS: {pos}  | VEL: {vel:.2f} km/s |\n"
             )
 
             f.write(telemetry)
