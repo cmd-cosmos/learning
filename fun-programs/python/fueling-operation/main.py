@@ -9,7 +9,7 @@
 ### stop prop load at set level
 ### perform final tank pressurization to flight pressure
 
-import tkinter as tk
+
 import time
 import threading
 import random
@@ -18,6 +18,14 @@ import random
 FUEL_FLOW_RATE = 2.5
 PRESSURIZATION_SIM_TIME = 5
 CHILL_SIM_TIME = 3
+
+state = {
+    "lox" : 0.0,
+    "ch4" : 0.0,
+    "PHASE" : "INIT",
+    "DONE" : False,
+    "LOCK" : threading.Lock(),
+}
 
 # daemon logger thread
 def log_proc(state):
