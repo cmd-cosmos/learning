@@ -50,8 +50,8 @@ class Rocket:
             self.velocity = 0
 
     
-starship = Rocket(1000, 700, 20000, 200)
-print(starship)
+# starship = Rocket(1000, 700, 20000, 200)
+# print(starship)
 
-starship.countDown(10)
+# starship.countDown(10)
 
