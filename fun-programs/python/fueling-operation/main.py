@@ -1,3 +1,4 @@
+#pylint: skip-file
 ### BASED ROUGHLY ON THE STARSHIP ---> PRE SHIP STATIC FIRE TESTING FUELING PROCEDURE 
 ### simulating fueling procedure of a rocket
 ### fuel LOX and Methane simultaneously
@@ -8,11 +9,36 @@
 ### stop prop load at set level
 ### perform final tank pressurization to flight pressure
 
+import tkinter as tk
+import time
+import threading
+import random
 
 # CONSTANTS ---> FLOW RATES, VOLUME, TIME, PRESSURES, TEMPERATURES
+FUEL_FLOW_RATE = 2.5
+PRESSURIZATION_SIM_TIME = 5
+CHILL_SIM_TIME = 3
 
+# daemon logger thread
+def log_proc(state):
+    while not state["DONE"]:
+        with state["LOCK"]:
+            lox = state["lox"]
+            ch4 = state["ch4"]
+            phase = state["PHASE"]
+        if phase == "PRESSURIZING":
+            print(f"[INFO] pressurizing tank farm")
+        elif phase == "CHILL":
+            print(f"[INFO] chilling plumbing")
+        elif phase == "LOAD":
+            print(f"[INFO] LOX : {lox:.2f}% | CH4 : {ch4:.2f}%")
+        elif phase == "LAUNCH_PRESS":
+            print(f"[INFO] final tank pressurization seq.")
+        
+        time.sleep(1)
 
-# ASYNC FUNCTIONS
+    print("[ALERT] prop load complete. go for static fire.")
+
 
 # HELPER FUNCTIONS
 
