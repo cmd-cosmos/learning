@@ -1,6 +1,7 @@
 // copying large resources
 
 #include <iostream>
+#include <algorithm>
 
 class Buffer{
     public:
@@ -9,6 +10,24 @@ class Buffer{
         {
             delete[] data;
         }
+
+        // deep copy using the copy constructor
+        Buffer(const Buffer& other) : m_size(other.m_size), data(new int[other.m_size])
+        {
+            std::copy(other.data, other.data+m_size, data);
+        }
+
+        Buffer& operator=(const Buffer& other){
+            if (this != &other)
+            {
+                delete[] data;
+                m_size = other.m_size;
+                data = new int[m_size];
+                std::copy(other.data, other.data + m_size, data);
+            }
+            return *this;
+        }
+
     private:
         size_t m_size;  
         int* data;
@@ -18,7 +37,9 @@ class Buffer{
 int main()
 {
     Buffer buff(1000);
-    Buffer cpy = buff; // underfined behavior --> dangling ptr or double delete
+    Buffer cpy = buff; // deep copy using the copy contructor
+
+    Buffer mv = std::move(buff); // move
 
     return 0;
 }
