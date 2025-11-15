@@ -4,6 +4,16 @@
 #include <memory>
 #include <iostream>
 
+class Foo{
+    public:
+        Foo() {
+            std::cout << "Foo obj created\n";
+        }
+        ~Foo() {
+            std::cout << "Foo killed\n";
+        }
+};
+
 int main()
 {
     // unique ptrs ensure exclusive ownership until moved
@@ -14,7 +24,7 @@ int main()
     // std::unique_ptr<int> dupli = p; // does not allow copying
     std::unique_ptr<int> mover = std::move(p); // move ownership to the mover ptr
 
-
+    auto ptr = std::make_unique<Foo>();
 
     return 0;
 }
