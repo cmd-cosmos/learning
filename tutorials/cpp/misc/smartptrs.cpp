@@ -24,7 +24,23 @@ int main()
     // std::unique_ptr<int> dupli = p; // does not allow copying
     std::unique_ptr<int> mover = std::move(p); // move ownership to the mover ptr
 
-    auto ptr = std::make_unique<Foo>();
+    {
+        auto ptr = std::make_unique<Foo>();
+    }
+
+    // shared pointers
+    std::shared_ptr<int> p1 = std::make_shared<int>(100);
+    std::shared_ptr<int> p2 = p1; // shared pointers
+    
+    std::cout << p1.use_count() << '\n'; // total ptrs sharing similar ownership
+
+    std::shared_ptr<Foo> o1 = std::make_shared<Foo>();
+    std::cout << o1.use_count() << '\n';
+    {
+        std::shared_ptr<Foo> o2 = o1;
+        std::cout << o1.use_count() << '\n';
+    }
+    std::cout << o1.use_count() << '\n';
 
     return 0;
 }
