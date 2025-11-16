@@ -1,5 +1,5 @@
 #pylint: skip-file
-#type-ignore
+#type: ignore
 
 # refcount is 1 higher than actual 
 # sys.getrefcount() adds a temp ref when passing the obj to the method
