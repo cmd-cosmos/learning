@@ -15,6 +15,6 @@ __pycache__/
 *Makefile
 *.obj
 *.s
-
+**/bin
 
 auto.bat
