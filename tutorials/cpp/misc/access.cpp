@@ -11,6 +11,22 @@ class Counter{
         Counter(int id) : m_id{id}
         {
             std::cout << "Constructing counter obj: " << m_id << '\n';
+            count = 0;
+        }
+
+        void countUp()
+        {
+           count++;
+        }
+
+        void printCount()
+        {
+            std::cout << "Count for Counter " << m_id << ": " << count << '\n';
+        }
+
+        void countUpOtherObj(Counter& other)
+        {
+            other.countUp();
         }
 
         ~Counter()
@@ -41,7 +57,24 @@ class Foo{
 int main()
 {
     Counter* c1 = new Counter(1);
+    
+    c1->countUp();
+    c1->countUp();
+    c1->countUp();
+    
+    c1->printCount();
     delete c1;
+
+    Counter* c2 = new Counter(2);
+
+    c2->countUp();
+    c2->countUp();
+    c2->countUp();
+    c2->countUp();
+
+    c1->countUpOtherObj(*c2);
+
+    c2->printCount();
 
     return 0;
 }
