@@ -9,14 +9,19 @@ headers = {
     "Accept" : "text/plain",
     }
 
-response = requests.get(url=url, headers=headers)
+run = True
 
-if response.status_code == 200:
-    print("Received Response.\n")
-    print("Joke:")
-    data = response.text
-else:
-    print("No Response.")
+while run:
+    user_inp = input("[DAD] Would you like to hear a Joke (y/n):\n[YOU]: ").strip().lower()
 
-
-print(data)
+    if user_inp == "y":
+        run = True
+        response = requests.get(url=url, headers=headers)
+        if response.status_code == 200:
+            data = response.text
+            print(f"\n[DAD]: {data}\n")
+        else:
+            print("No Response.")
+    else:
+        print("\nYour Loss...")
+        run = False
