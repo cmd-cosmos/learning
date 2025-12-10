@@ -8,7 +8,7 @@ int main()
 {
     unsigned char permissions = 0; // 0000 0000
 
-    printf("==> Granting Read Write Permissions.\n");
+    printf("==> Granting READ WRITE Permissions.\n");
 
     permissions |= READ | WRITE;
     printf("==> Permissions Set: %d\n", permissions); // 0000 0110 <-- execute denied at this stage
@@ -19,7 +19,23 @@ int main()
     }
     else
     {
-        printf("==> Denied: EXECUTE\n");
+        printf("====> Denied: EXECUTE\n");
+    }
+
+    printf("\n** REVOKE WRITE PERMISSIONS(y/n): ");
+    char revoke_inp;
+    scanf("%c", &revoke_inp);
+
+    if (revoke_inp == 'y' || revoke_inp == 'Y')
+    {
+        printf("==> Revoking WRITE PERMISSION.\n");
+        permissions &= ~WRITE;
+        printf("==> Revoked WRITE\n====> Permissions Set: %d\n", permissions);
+    }
+    else
+    {
+        printf("==> WRITE PERMISSION --> UNTOGGLED.\n");
+        printf("==> Permissions Set: %d\n", permissions);
     }
 
     return 0;
