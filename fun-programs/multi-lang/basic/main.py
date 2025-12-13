@@ -7,3 +7,6 @@ process = subprocess.run(["multiply.exe"], input="100 2000", text=True, capture_
 
 res = int(process.stdout.strip())
 print("C++ routine returned: ", res)
+
+print("\nC++ debug output:")
+print(process.stderr)
