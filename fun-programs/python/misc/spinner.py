@@ -4,6 +4,7 @@
 from rich.console import Console
 from rich.status import Status
 import time
+import random
 
 console = Console()
 
@@ -11,7 +12,8 @@ steps = [
     "[bold green]Initializing System Checks...[/bold green]",
     "[bold green]Pinging sub systems...[/bold green]",
     "[bold green]Fetching health parameters...[/bold green]",
-    "[bold green]System checks complete: NOMINAL[/bold green]"
+    "[bold green]System checks complete: NOMINAL[/bold green]",
+    "[bold red]System checks complete: ERROR[/bold red]"
 ]
 
 with console.status(steps[0]) as status:
@@ -21,4 +23,4 @@ with console.status(steps[0]) as status:
     status.update(steps[2])
     time.sleep(1)
 
-console.print(steps[3])
+console.print(random.choice(steps[3:5]))
