@@ -10,6 +10,10 @@ table.add_column("a", justify="right")
 table.add_column("b", justify="right")
 table.add_column("result", justify="right")
 
-table.add_row("4", "5", "20")
+inp = int(input("Enter num: "))
+print('\n')
+
+for i in range(1, 11):
+    table.add_row(str(inp), str(i), str(inp * i))
 
 print(table)
