@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cerr << "\n------- Entered C++ Routine -------\n";
+    std::cerr << "------- Entered C++ Routine -------\n";
     int a, b;
     std::cin >> a >> b;
     std::cerr << "Multiplying: " << a << " and " << b << '\n';
