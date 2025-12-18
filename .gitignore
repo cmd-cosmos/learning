@@ -18,3 +18,33 @@ __pycache__/
 **/bin
 
 auto.bat
+
+### C# ignores
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.pidb
+*.svclog
+*.pdb
+
+# Visual Studio Code files
+.vscode/
+
+# Visual Studio temporary files
+*.tmp
+*.log
+*.vs/
+*.ncb
+*.sdf
+
+# Rider IDE
+.idea/
+
+# NuGet packages
+*.nupkg
+packages/
