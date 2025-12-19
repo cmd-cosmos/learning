@@ -4,26 +4,37 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine(new string(' ', 30) + "Program List" + new string(' ', 30));
-        Console.WriteLine("1. Greet Me");
-        Console.WriteLine("2. Add Nums");
-        Console.WriteLine(new string('*', 70));
-        Console.Write("What program do you want to run: ");
-        int mode = Convert.ToInt32(Console.ReadLine());
-
-        switch (mode)
+        while (true)
         {
-            case 1:
-                Console.WriteLine(new string('*', 70));
-                Greet();
-                break;
-            case 2:
-                Console.WriteLine(new string('*', 70));
-                SumNumbers();
-                break;
-            default:
-                Console.WriteLine("Invalid Input.");
-                break;       
+            Console.Clear();
+            Console.WriteLine(new string(' ', 30) + "Program List" + new string(' ', 30));
+            Console.WriteLine("1. Greet Me");
+            Console.WriteLine("2. Add Nums");
+            Console.WriteLine("3. Exit");
+            Console.WriteLine(new string('*', 70));
+            Console.Write("What program do you want to run: ");
+            int mode = Convert.ToInt32(Console.ReadLine());
+
+            switch (mode)
+            {
+                case 1:
+                    Console.WriteLine(new string('*', 70));
+                    Greet();
+                    break;
+                case 2:
+                    Console.WriteLine(new string('*', 70));
+                    SumNumbers();
+                    break;
+                case 3:
+                    Console.WriteLine(new string('*', 70));
+                    Console.WriteLine("Exiting program");
+                    return;
+                default:
+                    Console.WriteLine("Invalid Input.");
+                    break;       
+            }
+            Console.WriteLine("\nPress Enter...");
+            Console.ReadLine();
         }
     }
 
