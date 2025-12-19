@@ -23,6 +23,7 @@ auto.bat
 # Build Folders
 bin/
 obj/
+*.sln
 
 # User-specific files
 *.user
