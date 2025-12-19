@@ -63,7 +63,17 @@ class Program
     {
         Console.Write("Enter Text: ");
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-        string inp = Console.ReadLine();
+        string inp;
+
+        while (true)
+        {
+            inp = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(inp))
+            {
+                break;
+            }
+            Console.WriteLine("Text cannot be empty.");
+        }
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
         int letters = 0;
         int digits  = 0;
