@@ -18,8 +18,17 @@ void unsafeCopy()
     */
 }
 
+void safeCopy()
+{
+    char buffer[8];
+    strncpy(buffer, "I am Batman, no I am Iron Man", sizeof(buffer) - 1);
+    buffer[7] = '\0';
+    printf("%s\n", buffer);
+}
+
 int main(int argc, char* argv[])
 {
-    unsafeCopy();
+    // unsafeCopy();
+    safeCopy();
     return 0;
 }
