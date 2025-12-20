@@ -1,6 +1,7 @@
 // using vars after freeing mem.
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 void safeUse()
@@ -30,11 +31,26 @@ void unsafe()
     printf("exiting unsafe routine\n");
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    safeUse();
-    printf('\n');
-    unsafe();
+    if (argc < 2)
+    {
+        printf("flags: --safe | --unsafe\n");
+        return 1;
+    }
+    if (strcmp(argv[1], "--safe") == 0)
+    {
+        safeUse();
+    }
+    else if (strcmp(argv[1], "--unsafe") == 0)
+    {
+        unsafe();
+    }
+    else{
+        printf("unknown arg: %s\n", argv[1]);
+        printf("flag: --safe | --unsafe\n");
+        return 1;
+    }
 
     return 0;    
 }
