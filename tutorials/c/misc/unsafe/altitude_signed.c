@@ -4,9 +4,27 @@
 // issue: since we deal with unsigned int, the difference is treated as +ve climb instead of descend.
 
 #include <stdio.h>
+#include <string.h>
 #include <stdint.h>
 
-int main(void)
+void safeAltDiff()
+{
+    uint16_t currAltitude   = 1000U;
+    uint16_t targetAltitude = 900U;
+
+    uint16_t delta = targetAltitude - currAltitude;
+    
+    int32_t safeDiff = (int32_t)targetAltitude - (int32_t)currAltitude;
+    printf("safe alt diff = %ld\n", (long)safeDiff);
+
+    if (safeDiff >= -100 && safeDiff <= 0)
+    {
+        printf("descent rate within safe range.\n");
+        printf("proceeding with auto descent procedure.\n");
+    }
+}
+
+void unsafeAltDiff()
 {
     uint16_t currAltitude   = 1000U;
     uint16_t targetAltitude = 900U;
@@ -23,14 +41,20 @@ int main(void)
         printf("descent delta out of instrumentation limits.\n");
     }
 
-    int32_t safeDiff = (int32_t)targetAltitude - (int32_t)currAltitude;
-    printf("safe alt diff = %ld\n", (long)safeDiff);
+}
 
-    if (safeDiff >= -100 && safeDiff <= 0)
+int main(int argc, char* argv[])
+{
+    if (strcmp(argv[1], "--safe") == 0)
     {
-        printf("descent rate within safe range.\n");
-        printf("proceeding with auto descent procedure.\n");
+        safeAltDiff();
     }
+    else if (strcmp(argv[1], "--unsafe") == 0)
+    {
+        unsafeAltDiff();
+    }
+
+    return 0;
 }
 
 /*
