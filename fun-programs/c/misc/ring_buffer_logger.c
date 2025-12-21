@@ -15,6 +15,7 @@ int main()
     {
         buffer[writeIndex] = i;
         // wrap and overwrite data after passing the 7th index as the buffer can only hold 8 vals at a time
+        // overwrite val 0 with the 8th val and the 7th val with 15th val
         writeIndex = (writeIndex + 1) & (BUF_SIZE - 1);
     }
 
