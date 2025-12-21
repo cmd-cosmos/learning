@@ -22,6 +22,15 @@ int main(void)
     {
         printf("descent delta out of instrumentation limits.\n");
     }
+
+    int32_t safeDiff = (int32_t)targetAltitude - (int32_t)currAltitude;
+    printf("safe alt diff = %ld\n", (long)safeDiff);
+
+    if (safeDiff >= -100 && safeDiff <= 0)
+    {
+        printf("descent rate within safe range.\n");
+        printf("proceeding with auto descent procedure.\n");
+    }
 }
 
 /*
