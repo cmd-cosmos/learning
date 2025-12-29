@@ -28,3 +28,10 @@ try{
 } catch (error) {
     console.log("error caught");
 }
+
+// function hoisting
+greet();
+
+function greet(){
+    console.log("Greetings");
+}
