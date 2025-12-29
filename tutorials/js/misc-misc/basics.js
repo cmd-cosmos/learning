@@ -30,8 +30,19 @@ try{
 }
 
 // function hoisting
+// arrow functions are not hoisted
+// only regular functions are hoisted
 greet();
 
 function greet(){
     console.log("Greetings");
 }
+
+// default args
+
+function say(name="Default"){
+    console.log(`I am ${name}`);
+}
+
+say();
+say("Batman");
