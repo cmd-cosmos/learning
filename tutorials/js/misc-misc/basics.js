@@ -11,3 +11,9 @@ let user = {
 console.log(user.name)
 console.log(user.age)
 console.log(user.isInGotham)
+
+let nums = [1,2,3,4,5]
+
+for (let num of nums){
+    console.log(num);
+}
