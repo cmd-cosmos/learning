@@ -21,3 +21,10 @@ for (let num of nums){
 // arrow functions
 const mult = (a, b) => a*b;
 console.log(mult(3,4));
+
+try{
+    let res = x + 10;
+    console.log(res);
+} catch (error) {
+    console.log("error caught");
+}
