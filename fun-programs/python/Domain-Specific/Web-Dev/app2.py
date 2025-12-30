@@ -1,6 +1,6 @@
 #pylint: skip-file
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -15,6 +15,10 @@ def about():
 @app.route("/user/<name>")
 def user(name):
     return f"I am {name}"
+
+@app.route("/pages")
+def pages():
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
