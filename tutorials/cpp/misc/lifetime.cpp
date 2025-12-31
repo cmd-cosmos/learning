@@ -17,9 +17,18 @@ struct Tracker {
     }
 };
 
+void test()
+{
+    Tracker a("A");
+    {
+        Tracker b("B");
+    }
+    std::cout << "exiting scope\n";
+}
+
 int main(void)
 {
-
+    test();
 
     return EXIT_SUCCESS;
 }
