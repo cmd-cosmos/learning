@@ -29,5 +29,8 @@ int main(void)
     printf("heap mem addr  : %p\n", heap_var);
     printf("os mem addr    : %p\n", os_mem);
 
+    HeapFree(GetProcessHeap(), 0, heap_var);
+    VirtualFree(os_mem, 0, MEM_RELEASE);
+
     return 0;
 }
