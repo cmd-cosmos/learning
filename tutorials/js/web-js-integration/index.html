@@ -33,9 +33,11 @@
         function modify() {
             if (title.textContent === oldText) {
                 title.textContent = "I am Batman, well not really...";
+                alert("printing modified text");
             }
             else {
                 title.textContent = oldText;
+                alert("reverting to original text");
             }
         }
 
