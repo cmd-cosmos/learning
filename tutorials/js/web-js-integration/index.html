@@ -16,6 +16,10 @@
     <input type="text" id="name-input" placeholder="enter name">
     <p id="output-para"></p>
 
+    <h1 id="title2">Gotham</h1>
+    <p class="text">where is Batman</p>
+    <p class="text">I am Joker</p>
+
     <style>
         input{
             padding: 10px;
@@ -66,6 +70,14 @@
         inp.addEventListener("input", () => {
             out.textContent = inp.value;
         })
+
+        // by id
+        const title2 = document.getElementById("title2");
+        console.log(title2.textContent);
+        
+        // selecting by class -> single class element
+        const batmanText = document.querySelector(".text");
+        console.log(batmanText.textContent);
     </script>
 </body>
 </html>
