@@ -6,7 +6,7 @@
     <title>JS Sandbox</title>
 </head>
 <body>
-    <h1 id="title">I am Vengeance</h1>
+    <h1 id="title">I am Vengeance, I am the Night</h1>
     <button id="btn1" onclick="modify()">test</button>
 
     <style>
@@ -17,9 +17,17 @@
     </style>
 
     <script>
+        const title = document.getElementById("title");
+        const oldText = title.textContent;
+
         function modify() {
-            document.getElementById("title").textContent = "I am Batman";
-        }
+            if (title.textContent === oldText) {
+                title.textContent = "I am Batman, well not really...";
+            }
+            else {
+                title.textContent = oldText;
+            }
+        }        
     </script>
 </body>
 </html>
