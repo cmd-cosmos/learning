@@ -11,6 +11,8 @@
 
     <button class="btn-custom" id="btn2">mode</button>
 
+    <button class="btn-custom" id="btn3">event</button>
+
     <style>
         .btn-custom {
             height: 30px;
@@ -42,6 +44,14 @@
         btn2.addEventListener("click", () => {
             document.body.classList.toggle("dark")
         })
+
+        const btn3 = document.getElementById("btn3");
+        btn3.addEventListener("click", greet);
+
+        function greet() {
+            alert("click event triggered");
+            console.log("event triggered for btn 3");
+        }
     </script>
 </body>
 </html>
