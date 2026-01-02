@@ -21,6 +21,11 @@
     <p class="text">I am Joker</p>
     <br><hr>
 
+    <input type="text" id="nameInp" placeholder="enter your name">
+    <button id="greetBtn">greet me</button>
+    <p id="outputPara"></p>
+    <br><hr>
+
     <style>
         input{
             padding: 10px;
@@ -99,6 +104,16 @@
         document.body.appendChild(newBreak)
         document.body.appendChild(newRule)
         document.body.appendChild(newBreak)
+
+        // greet - event
+        const inputBar = document.getElementById("nameInp");
+        const greetBtn = document.getElementById("greetBtn");
+        const outputPara = document.getElementById("outputPara");
+
+        greetBtn.addEventListener("click", () => {
+            const name = inputBar.value;
+            outputPara.textContent = `Hello ${name}, welcome to the Batcave`;
+        });
 
     </script>
 </body>
