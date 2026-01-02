@@ -9,10 +9,20 @@
     <h1 id="title">I am Vengeance, I am the Night</h1>
     <button id="btn1" onclick="modify()">test</button>
 
+    <button id="btn2">mode</button>
+
     <style>
         #btn1{
             height: 30px;
             width: 100px;
+        }
+        #btn2 {
+            height: 30px;
+            width: 100px;
+        }
+        .dark{
+            background-color: black;
+            color: white;
         }
     </style>
 
@@ -27,7 +37,13 @@
             else {
                 title.textContent = oldText;
             }
-        }        
+        }
+
+        const btn2 = document.getElementById("btn2");
+
+        btn2.addEventListener("click", () => {
+            document.body.classList.toggle("dark")
+        })
     </script>
 </body>
 </html>
