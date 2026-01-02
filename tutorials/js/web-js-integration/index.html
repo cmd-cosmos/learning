@@ -6,7 +6,8 @@
     <title>JS Sandbox</title>
 </head>
 <body>
-    <button id="btn1">test</button>
+    <h1 id="title">I am Vengeance</h1>
+    <button id="btn1" onclick="modify()">test</button>
 
     <style>
         #btn1{
@@ -14,5 +15,11 @@
             width: 100px;
         }
     </style>
+
+    <script>
+        function modify() {
+            document.getElementById("title").textContent = "I am Batman";
+        }
+    </script>
 </body>
 </html>
