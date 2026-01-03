@@ -10,3 +10,13 @@ greetMe(); // undefined
 
 const workingGreet = user.greet.bind(user);
 workingGreet();
+
+// static methods 
+
+class Utils {
+    static add(a, b) {
+        return a + b;
+    }
+}
+
+console.log(Utils.add(1,2));
