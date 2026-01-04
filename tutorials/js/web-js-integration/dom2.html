@@ -14,16 +14,23 @@
     <h1>Counter</h1>
     <h1 id="counter">0</h1>
     <button id="btn">click</button>
+    <button id="resBtn">reset</button>
 
     <script>
         const button = document.getElementById("btn");
         const counter = document.getElementById("counter");
+        const resetBtn = document.getElementById("resBtn");
     
         let count = 0;
 
         button.addEventListener("click", () => {
             count++;
             counter.textContent = count;
+        })
+
+        resetBtn.addEventListener("click", () => {
+            count = 0;
+            counter.textContent = 0;
         })
     </script>
 </body>
