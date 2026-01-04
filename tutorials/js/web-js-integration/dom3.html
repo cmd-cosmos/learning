@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 3</title>
+    <style>
+        .active{
+            color: white;
+            background: black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">click button</h1>
+    <button id="toggle">toggle</button>
+
+    <script>
+        const title = document.getElementById("title");
+        const toggle = document.getElementById("toggle");
+
+        toggle.addEventListener("click", () => {
+            title.classList.toggle("active");
+        })
+    </script>
+</body>
+</html>
