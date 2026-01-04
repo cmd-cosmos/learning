@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 4</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task List</h1>
+    <ul id="list">
+        <li>task 1</li>
+        <li>task 2</li>
+        <li>task 3</li>
+        <li>task 4</li>
+    </ul>
+
+    <script>
+        const list = document.getElementById("list");
+
+        list.addEventListener("click", (e) => {
+            if (e.target.tagName === "LI") {
+                e.target.classList.toggle("done");
+            }
+        });
+    </script>
+</body>
+</html>
