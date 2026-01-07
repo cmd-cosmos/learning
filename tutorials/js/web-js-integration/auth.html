@@ -17,8 +17,17 @@
     <input type="text" id="password-input" placeholder="enter pass"> <br>
     <button id="enter-btn">Enter</button>
     <button id="register-btn">Register</button>
-    <script>
 
+    <script>
+        const id_input = document.getElementById("id-input");
+        const password_input = document.getElementById("password-input");
+        const enter_btn = document.getElementById("enter-btn");
+        const register_btn = document.getElementById("register-btn");
+
+        register_btn.addEventListener("click", () => {
+            console.log(id_input.value);
+            console.log(password_input.value);
+        })
     </script>
 </body>
 </html>
