@@ -27,11 +27,12 @@ TARGET_CH4 = 100.00
 LOG_INTERVAL = 1 #seconds
 
 state = {
-    "lox" : 0.0,
-    "ch4" : 0.0,
+    "lox"   : 0.0,
+    "ch4"   : 0.0,
     "PHASE" : "INIT",
-    "DONE" : False,
-    "LOCK" : threading.Lock(),
+    "DONE"  : False,
+    "ABORT" : False,
+    "LOCK"  : threading.Lock(),
 }
 
 # daemon logger thread
@@ -41,18 +42,27 @@ def log_proc(state):
             lox = state["lox"]
             ch4 = state["ch4"]
             phase = state["PHASE"]
+            abort = state["ABORT"]
+
+        sys.stdout.write("\r")
+        sys.stdout.flush()
+        if abort:
+            print("\n[ABORT] Sequence Aborter - Commencing Safing Procedures")
+
         if phase == "PRESSURIZING":
             print(f"[INFO] pressurizing tank farm")
         elif phase == "CHILL":
             print(f"[INFO] chilling plumbing")
         elif phase == "LOAD":
-            print(f"[INFO] LOX : {lox:.2f}% | CH4 : {ch4:.2f}%")
+            print(f"[INFO] LOX : {lox:6.2f}% | CH4 : {ch4:6.2f}%")
         elif phase == "LAUNCH_PRESS":
             print(f"[INFO] final tank pressurization seq.")
+        else:
+            sys.stdout.write("[INIT] Stand By")
         
-        time.sleep(1)
+        time.sleep(LOG_INTERVAL)
 
-    print("[ALERT] prop load complete. go for static fire.")
+    print("[ALERT] Prop Load Complete => GO for static fire.")
 
 
 # HELPER FUNCTIONS
