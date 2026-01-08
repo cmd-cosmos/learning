@@ -24,9 +24,17 @@
         const enter_btn = document.getElementById("enter-btn");
         const register_btn = document.getElementById("register-btn");
 
+        let dict = {};
+
         register_btn.addEventListener("click", () => {
             console.log(id_input.value);
             console.log(password_input.value);
+            dict[id_input.value] = password_input.value;
+            console.log(dict);
+
+            alert(`User ${id_input.value} registered`)
+            id_input.value = "";
+            password_input.value = "";
         })
     </script>
 </body>
