@@ -40,6 +40,24 @@
             id_input.value = "";
             password_input.value = "";
         })
+
+        enter_btn.addEventListener("click", () => {
+            if (id_input.value.trim() === "" || password_input.value.trim() === "") {
+                alert("id/password cannot be empty");
+                return;
+            }
+            if (password_input.value === dict[id_input.value]) {
+                id_input.value = "";
+                password_input.value = "";
+                alert("logging in");
+            }
+            else {
+                alert("id/pass do not match");
+                id_input.value = "";
+                password_input.value = "";
+                return;
+            }
+        })
     </script>
 </body>
 </html>
