@@ -14,6 +14,7 @@ import time
 import threading
 import random
 import sys
+from rich.progress import Progress
 
 # CONSTANTS ---> FLOW RATES, VOLUME, TIME, PRESSURES, TEMPERATURES
 FUEL_FLOW_RATE              =    2.5
@@ -63,6 +64,7 @@ def logProcedure(state):
             print(f"[INFO] final tank pressurization seq.")
         else:
             sys.stdout.write("[INIT] Stand By")
+            time.sleep(3)
         
         time.sleep(LOG_INTERVAL)
 
@@ -153,6 +155,11 @@ def main():
     
 # entry point
 if __name__ == "__main__":
+    with Progress() as progress:
+        task = progress.add_task("[bold green]Loading...", total=100)
+        for _ in range(100):
+            time.sleep(0.1)
+            progress.update(task, advance=1)
     main()
 
 
