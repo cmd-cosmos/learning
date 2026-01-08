@@ -6,58 +6,68 @@
     <title>Auth</title>
     <style>
         input {
-            margin-bottom: 10px;
             padding: 10px;
+        }
+        .main-div {
+            display: grid;
+            place-items: center;
+        }
+        button {
+            width: 100px;
+            margin: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Enter ID-Password</h1>
-    <input type="text" id="id-input" placeholder="enter id"> <br>
-    <input type="text" id="password-input" placeholder="enter pass"> <br>
-    <button id="enter-btn">Enter</button>
-    <button id="register-btn">Register</button>
+    <div class="main-div">
+        <h1>Authentication</h1>
+        <input type="text" id="id-input" placeholder="enter id"> <br>
+        <input type="text" id="password-input" placeholder="enter pass"> <br>
+        <button id="enter-btn">Enter</button>
+        <button id="register-btn">Register</button>
 
-    <script>
-        const id_input = document.getElementById("id-input");
-        const password_input = document.getElementById("password-input");
-        const enter_btn = document.getElementById("enter-btn");
-        const register_btn = document.getElementById("register-btn");
+        <script>
+            const id_input = document.getElementById("id-input");
+            const password_input = document.getElementById("password-input");
+            const enter_btn = document.getElementById("enter-btn");
+            const register_btn = document.getElementById("register-btn");
 
-        let dict = {};
+            let dict = {};
 
-        register_btn.addEventListener("click", () => {
-            if (id_input.value.trim() === "" || password_input.value.trim() === "") {
-                alert("id/password cannot be empty");
-                return;
-            }
-            console.log(id_input.value);
-            console.log(password_input.value);
-            dict[id_input.value] = password_input.value;
-            console.log(dict);
+            register_btn.addEventListener("click", () => {
+                if (id_input.value.trim() === "" || password_input.value.trim() === "") {
+                    alert("id/password cannot be empty");
+                    return;
+                }
+                console.log(id_input.value);
+                console.log(password_input.value);
+                dict[id_input.value] = password_input.value;
+                console.log(dict);
 
-            alert(`User ${id_input.value} registered`)
-            id_input.value = "";
-            password_input.value = "";
-        })
-
-        enter_btn.addEventListener("click", () => {
-            if (id_input.value.trim() === "" || password_input.value.trim() === "") {
-                alert("id/password cannot be empty");
-                return;
-            }
-            if (password_input.value === dict[id_input.value]) {
+                alert(`User ${id_input.value} registered`)
                 id_input.value = "";
                 password_input.value = "";
-                alert("logging in");
-            }
-            else {
-                alert("id/pass do not match");
-                id_input.value = "";
-                password_input.value = "";
-                return;
-            }
-        })
-    </script>
+            })
+
+            enter_btn.addEventListener("click", () => {
+                if (id_input.value.trim() === "" || password_input.value.trim() === "") {
+                    alert("id/password cannot be empty");
+                    return;
+                }
+                if (password_input.value === dict[id_input.value]) {
+                    id_input.value = "";
+                    password_input.value = "";
+                    alert("logging in");
+                }
+                else {
+                    alert("id/pass do not match");
+                    id_input.value = "";
+                    password_input.value = "";
+                    return;
+                }
+            })
+        </script>
+    </div>
+    
 </body>
 </html>
