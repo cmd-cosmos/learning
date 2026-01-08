@@ -54,7 +54,11 @@ def logProcedure(state):
         elif phase == "CHILL":
             print(f"[INFO] chilling plumbing")
         elif phase == "LOAD":
-            print(f"[INFO] LOX : {lox:6.2f}% | CH4 : {ch4:6.2f}%")
+            if lox == 100.00 and ch4 == 100.00:
+                print(f"[INFO] LOX : {lox:6.2f}% | CH4 : {ch4:6.2f}%")
+                print("[INFO] Prop Load Complete")
+            else:
+                print(f"[INFO] LOX : {lox:6.2f}% | CH4 : {ch4:6.2f}%")
         elif phase == "LAUNCH_PRESS":
             print(f"[INFO] final tank pressurization seq.")
         else:
@@ -118,6 +122,7 @@ def getTargetVehicle():
             selection = int(input("Enter Selection: "))
             if selection in vehicleMap:
                 print(f"\n[CONFIG] Selected: {vehicleMap[selection]}")
+                print("-"*50)
                 return vehicleMap[selection]
         except ValueError:
             pass
