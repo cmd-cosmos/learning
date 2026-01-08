@@ -22,7 +22,7 @@
     <div class="main-div">
         <h1>Authentication</h1>
         <input type="text" id="id-input" placeholder="enter id"> <br>
-        <input type="text" id="password-input" placeholder="enter pass"> <br>
+        <input type="password" id="password-input" placeholder="enter pass"> <br>
         <button id="enter-btn">Enter</button>
         <button id="register-btn">Register</button>
 
@@ -44,7 +44,7 @@
                 dict[id_input.value] = password_input.value;
                 console.log(dict);
 
-                alert(`User ${id_input.value} registered`)
+                alert(`Registered User: ${id_input.value}`)
                 id_input.value = "";
                 password_input.value = "";
             })
