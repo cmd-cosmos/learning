@@ -67,6 +67,33 @@ def log_proc(state):
 
 # HELPER FUNCTIONS
 
+def pressurize():
+    with state["LOCK"]:
+        state["PHASE"] = "PRESSURIZING"
+    time.sleep(PRESSURIZATION_SIM_TIME)
+
+def chill_lines():
+    with state["LOCK"]:
+        state["PHASE"] = "CHILL"
+    time.sleep(CHILL_SIM_TIME)
+
+def load_prop():
+    with state["LOCK"]:
+        state["PHASE"] = "LOAD"
+    while True:
+        with state["LOCK"]:
+            if state["lox"] >= TARGET_LOX and state["ch4"] >= TARGET_CH4:
+                break
+
+            state["lox"] = min(TARGET_LOX, state["lox"] + FUEL_FLOW_RATE + random.uniform(-0.5,0.5))
+            state["ch4"] = min(TARGET_CH4, state["ch4"] + FUEL_FLOW_RATE + random.uniform(-0.5, 0.5))
+        time.sleep(1)
+
+def final_press():
+    with state["LOCK"]:
+        state["PHASE"] = "LAUNCH_PRESS"
+    time.sleep(FINAL_PRESS_TIME)
+
 def getTargetVehicle():
     '''Function to get test article ---> for now only supports ship subroutine'''
 
