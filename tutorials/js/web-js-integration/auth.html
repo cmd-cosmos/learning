@@ -27,6 +27,10 @@
         let dict = {};
 
         register_btn.addEventListener("click", () => {
+            if (id_input.value.trim() === "" || password_input.value.trim() === "") {
+                alert("id/password cannot be empty");
+                return;
+            }
             console.log(id_input.value);
             console.log(password_input.value);
             dict[id_input.value] = password_input.value;
