@@ -15,6 +15,8 @@ import threading
 import random
 import sys
 from rich.progress import Progress
+from rich.console import Console
+from rich.status import Status
 
 # CONSTANTS ---> FLOW RATES, VOLUME, TIME, PRESSURES, TEMPERATURES
 FUEL_FLOW_RATE              =    2.5
@@ -160,6 +162,22 @@ if __name__ == "__main__":
         for _ in range(100):
             time.sleep(0.1)
             progress.update(task, advance=1)
+
+    console = Console()
+    steps = [
+        "[bold green]Initializing System Checks...[/bold green]",
+        "[bold green]Pinging sub systems...[/bold green]",
+        "[bold green]Fetching health parameters...[/bold green]",
+        "[bold green]System checks complete: NOMINAL[/bold green]"
+    ]
+    with console.status(steps[0]) as status:
+        time.sleep(1)
+        status.update(steps[1])
+        time.sleep(1)
+        status.update(steps[2])
+        time.sleep(1)
+    console.print(steps[-1])
+
     main()
 
 
