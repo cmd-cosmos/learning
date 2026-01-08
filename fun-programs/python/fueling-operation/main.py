@@ -36,7 +36,7 @@ state = {
 }
 
 # daemon logger thread
-def log_proc(state):
+def logProcedure(state):
     while not state["DONE"]:
         with state["LOCK"]:
             lox = state["lox"]
@@ -72,12 +72,12 @@ def pressurize():
         state["PHASE"] = "PRESSURIZING"
     time.sleep(PRESSURIZATION_SIM_TIME)
 
-def chill_lines():
+def chillLines():
     with state["LOCK"]:
         state["PHASE"] = "CHILL"
     time.sleep(CHILL_SIM_TIME)
 
-def load_prop():
+def loadProp():
     with state["LOCK"]:
         state["PHASE"] = "LOAD"
     while True:
@@ -89,7 +89,7 @@ def load_prop():
             state["ch4"] = min(TARGET_CH4, state["ch4"] + FUEL_FLOW_RATE + random.uniform(-0.5, 0.5))
         time.sleep(1)
 
-def final_press():
+def finalPressurize():
     with state["LOCK"]:
         state["PHASE"] = "LAUNCH_PRESS"
     time.sleep(FINAL_PRESS_TIME)
@@ -122,11 +122,33 @@ def getTargetVehicle():
         except ValueError:
             pass
         print("[WARN] Invalid Selection - Retry")
-    
-# CONTROL LOOP
 
-if __name__ == "__main__":
+# control loop
+
+def main():
     targetVehicle = getTargetVehicle()
+
+    logger = threading.Thread(target=logProcedure, args=(state,), daemon=True)
+    logger.start()
+
+    try:
+        pressurize()
+        chillLines()
+        loadProp()
+        finalPressurize()
+    except KeyboardInterrupt:
+        with state["LOCK"]:
+            state["ABORT"] = True
+            state["DONE"] = True
+        return
+    with state["LOCK"]:
+        state["DONE"] = True
+    
+    logger.join()
+    
+# entry point
+if __name__ == "__main__":
+    main()
 
 
 
