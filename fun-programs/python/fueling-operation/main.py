@@ -104,10 +104,7 @@ def getTargetVehicle():
         4 : "Dry Run",
     }
 
-    validInputs = [1,2,3,4]
-    valid = False
-
-    while(valid==False):
+    while(True):
         print("-"*50)
         print("Choose Test Article/Procedure: ")
         print("-"*50)
@@ -118,31 +115,13 @@ def getTargetVehicle():
         print("-"*50)
         
         try:
-            targetVehicle = int(input("Enter Selection: "))
-            if targetVehicle == 1:
-                print("Proceeding with Ship Prop Load Procedures...")
-                print("-"*50)
-                valid=True
-            elif targetVehicle == 2:
-                print("Proceeding with Booster Prop Load Procedures...")
-                print("-"*50)
-                valid=True
-            elif targetVehicle == 3:
-                print("Proceeding with Starship SuperHeavy System Load Procedures...")
-                print("-"*50)
-                valid=True
-            elif targetVehicle == 4:
-                print("Dry Run - Test Procedure 1.2.31")
-                print("-"*50)
-                valid=True
-            else:
-                print("Invalid Input")
-                print("-"*50)
+            selection = int(input("Enter Selection: "))
+            if selection in vehicleMap:
+                print(f"\n[CONFIG] Selected: {vehicleMap[selection]}")
+                return vehicleMap[selection]
         except ValueError:
-            print("Invalid Input")
-            print("-" * 50)
-
-    return vehicleMap[targetVehicle]
+            pass
+        print("[WARN] Invalid Selection - Retry")
     
 # CONTROL LOOP
 
