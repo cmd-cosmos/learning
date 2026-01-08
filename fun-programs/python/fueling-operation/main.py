@@ -13,11 +13,18 @@
 import time
 import threading
 import random
+import sys
 
 # CONSTANTS ---> FLOW RATES, VOLUME, TIME, PRESSURES, TEMPERATURES
-FUEL_FLOW_RATE = 2.5
-PRESSURIZATION_SIM_TIME = 5
-CHILL_SIM_TIME = 3
+FUEL_FLOW_RATE              =    2.5
+PRESSURIZATION_SIM_TIME     =    5
+CHILL_SIM_TIME              =    3
+FINAL_PRESS_TIME            =    4
+
+TARGET_LOX = 100.00
+TARGET_CH4 = 100.00
+
+LOG_INTERVAL = 1 #seconds
 
 state = {
     "lox" : 0.0,
