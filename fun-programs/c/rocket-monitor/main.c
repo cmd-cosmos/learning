@@ -120,8 +120,8 @@ int main(void)
                     printf("Reading SYSTEM TEMPERATURE ---> %d\n", sensorStatus[i]);
                     break;    
                 default:
-                printf("Reading on port %d ---> Unknown Sensor\n");
-                break;
+                    printf("Reading ON PORT %d ---> Unknown Sensor\n", sensorStatus[i]);
+                    break;
             }
             sleep(2);
         }    
@@ -132,7 +132,9 @@ int main(void)
         health_check_complete = 1;
         for (int i = 0; i < NUM_SENSORS; i++)
         {
-            if (sensorStatus[i] == FAULT || sensorStatus[i] == CRITICAL)
+            // goNoGo set to 0 only in case of critical error
+            // sensorStatus[i] == FAULT || 
+            if (sensorStatus[i] == CRITICAL)
             {
                 goNoGo = 0; // pre-empt all processes
                 break;
