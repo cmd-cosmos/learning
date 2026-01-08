@@ -6,7 +6,7 @@
     <title>Fun</title>
 
     <style>
-        canvas {
+        #funCanvas {
             height: 500px;
             width:  500px;
             background-color: yellow;
@@ -18,9 +18,10 @@
     <canvas id="funCanvas"></canvas>
     <script>
         const canvas = document.getElementById("funCanvas");
-        const context = canvas.getElementById("2d");
+        const context = canvas.getContext("2d");
 
-        canvas.fillRect(10, 10, 10, 20);
+        context.fillStyle = "black"
+        context.fillRect(10, 10, 100, 20);
     </script>
 </body>
 </html>
