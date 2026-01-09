@@ -26,7 +26,7 @@ class Motor {
             else {
                 rpm_ = rpm;
                 state_ = (rpm_ > 0) ? State::RUNNING : State::STOPPED;
-                std::cout << "Motor RPM: " << rpm << " RPM";
+                std::cout << "Motor RPM: " << rpm << " RPM\n";
             }
         }
 
@@ -73,10 +73,11 @@ int main(void)
     try
     {
         m.setRPM(1000);
+        std::cout << "Motor State: " << m.getStateString() << '\n';
     }
-    catch(const std::runtime_error& e)
+    catch(const MotorException& e)
     {
-        std::cout << "MOTOR ERROR: " << e.what() << '\n';
+        std::cerr << "MOTOR ERROR: " << e.what() << '\n';
     }
     
     std::cout << "\nSetting motor speed to 5000 RPM\n";
@@ -85,9 +86,10 @@ int main(void)
     {
         m.setRPM(5000);
     }
-    catch(const std::runtime_error& e)
+    catch(const MotorException& e)
     {
-        std::cerr << "MOTOR ERROR: " << e.what() << '\n';
+        std::cerr << "\nMOTOR ERROR: " << e.what();
+        std::cerr << "POST FAULT STATE: " << m.getStateString() << '\n';
     }
     
 
