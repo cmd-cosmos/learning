@@ -8,6 +8,12 @@ class MotorException : public std::runtime_error {
 
 class Motor {
     public:
+        enum class State {
+            STOPPED,
+            RUNNING,
+            FAULT
+        };
+        Motor() : rpm_(0.0), state_(State::STOPPED) {}
         void setRPM(double rpm) {
             if (rpm > 3500) {
                 throw std::runtime_error("MOTOR OVERSPEEDING\n");
@@ -16,6 +22,17 @@ class Motor {
                 std::cout << "Motor RPM: " << rpm << " RPM";
             }
         }
+    private:
+        double rpm_;
+        State state_;
+
+        void triggerFault(const std::string& reason) {
+            rpm_ = 0;
+            state_ = State::FAULT;
+            throw MotorException(reason);
+        }
+
+        static constexpr double MAX_RPM = 3500.0;
 };
 
 int main(void)
