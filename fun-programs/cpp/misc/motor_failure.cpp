@@ -13,15 +13,24 @@ class Motor {
             RUNNING,
             FAULT
         };
+
         Motor() : rpm_(0.0), state_(State::STOPPED) {}
+        
         void setRPM(double rpm) {
-            if (rpm > 3500) {
-                throw std::runtime_error("MOTOR OVERSPEEDING\n");
+            if (rpm > MAX_RPM) {
+                triggerFault("MOTOR OVERSPEEDING\n");
+            }
+            if (rpm < 0) {
+                triggerFault("NEGATIVE RPM ERROR");
             }
             else {
+                rpm_ = rpm;
+                state_ = (rpm_ > 0) ? State::RUNNING : State::STOPPED;
                 std::cout << "Motor RPM: " << rpm << " RPM";
             }
         }
+
+
     private:
         double rpm_;
         State state_;
