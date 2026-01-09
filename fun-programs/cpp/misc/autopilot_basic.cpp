@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include <functional>
+#include <thread>
 
 enum class FlightMode {
     IDLE,
@@ -12,33 +12,19 @@ enum class FlightMode {
 class Autopilot
 {
     FlightMode mode{FlightMode::IDLE};
-    std::chrono::steady_clock::time_point last;
+    std::chrono::steady_clock::time_point last {std::chrono::steady_clock::now()};
     public:
-        Autopilot() : last(std::chrono::steady_clock::now()) {}
-        
-        void update(std::function<bool()> gearLocked) 
+        void update(bool gearLocked) 
         {
             auto now = std::chrono::steady_clock::now();
             if (now - last < std::chrono::milliseconds(100)) return;
             last = now;
 
-            switch (mode)
-            {
-            case FlightMode::IDLE: 
-                mode = FlightMode::TAKEOFF; 
-                break;
-            case FlightMode::TAKEOFF:
-                if (gearLocked()) {
-                    mode = FlightMode::CRUISE;
-                }
-                break;
-            case FlightMode::CRUISE:
-                if (!gearLocked()) {
-                    mode = FlightMode::LAND;
-                }
-                break;
-            default:
-                break;
+            if (mode == FlightMode::IDLE) {
+                mode = FlightMode::TAKEOFF;
+            }
+            else if (mode == FlightMode::TAKEOFF && gearLocked) {
+                mode = FlightMode::CRUISE;
             }
         }
 
@@ -51,8 +37,10 @@ class Autopilot
 int main(void)
 {
     Autopilot ap;
-    ap.update([] {return true; });
-    ap.log();
-
+    for (int i = 0; i < 5; i++) {
+        ap.update(true);
+        ap.log();
+        std::this_thread::sleep_for(std::chrono::milliseconds(120));
+    }
     return EXIT_SUCCESS;
 }
