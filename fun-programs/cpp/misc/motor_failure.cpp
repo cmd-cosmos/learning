@@ -1,6 +1,11 @@
 #include <iostream>
 #include <stdexcept>
 
+class MotorException : public std::runtime_error {
+    public:
+        explicit MotorException(const std::string& msg) : std::runtime_error(msg) {}
+};
+
 class Motor {
     public:
         void setRPM(double rpm) {
