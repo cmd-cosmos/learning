@@ -50,7 +50,9 @@ class Autopilot
 
 int main(void)
 {
-
+    Autopilot ap;
+    ap.update([] {return true; });
+    ap.log();
 
     return EXIT_SUCCESS;
 }
