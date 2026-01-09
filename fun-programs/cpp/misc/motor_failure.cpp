@@ -30,6 +30,29 @@ class Motor {
             }
         }
 
+        void stop() {
+            rpm_ = 0;
+            state_ = State::STOPPED;
+            std::cout << "Motor Stopped\n";
+        }
+
+        double getRPM() const {
+            return rpm_;
+        }
+
+        State getState() const {
+            return state_;
+        }
+
+        std::string getStateString() const {
+            switch (state_)
+            {
+            case State::STOPPED: return "STOPPED";
+            case State::RUNNING: return "RUNNING";            
+            case State::FAULT:   return "FAULT";            
+            default:             return "UNKNOWN";
+            }
+        }
 
     private:
         double rpm_;
