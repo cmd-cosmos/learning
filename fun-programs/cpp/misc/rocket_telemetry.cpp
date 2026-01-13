@@ -67,6 +67,38 @@ void sensorProd()
     std::cout << "[PRODUCER] stopped telemetry generation\n";
 }
 
+/**
+ * @brief telemetry consumer function - essentially telemetry downlink
+ * 
+ * @return void
+ * 
+ */
+void telemetryConsumer()
+{
+    while (missionActive || !telemetryBuffer.empty())
+    {
+        std::unique_lock<std::mutex> lock(bufferMutex);
+        bufferNotEmpty.wait(lock, [] {
+            return !telemetryBuffer.empty() || !missionActive;
+        });
+
+        if (telemetryBuffer.empty()) {
+            continue;
+        }
+
+        TelemetryPacket_t packet = telemetryBuffer.front();
+        telemetryBuffer.pop();
+
+        std::cout << "[CONSUMER] received packet: " << packet.packetID << '\n';
+
+        lock.unlock();
+        bufferNotFull.notify_one();
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(900));
+    }
+    std::cout << "[CONSUMER] telemetry downlink closed\n";
+}
+
 int main(void)
 {
 
