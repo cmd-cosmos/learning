@@ -99,6 +99,17 @@ void telemetryConsumer()
     std::cout << "[CONSUMER] telemetry downlink closed\n";
 }
 
+void missionControl()
+{
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    std::cout << "[MISSION CONTROL] task complete\n";
+
+    missionActive = false;
+
+    bufferNotEmpty.notify_all();
+    bufferNotFull.notify_all();
+}
+
 int main(void)
 {
 
