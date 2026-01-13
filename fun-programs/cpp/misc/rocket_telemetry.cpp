@@ -112,7 +112,16 @@ void missionControl()
 
 int main(void)
 {
+    std::cout << "telemetry sys online...\n\n";
 
+    std::thread producer(sensorProd);
+    std::thread consumer(telemetryConsumer);
+    std::thread control(missionControl);
 
+    producer.join();
+    consumer.join();
+    control.join();
+
+    std::cout << "\ntelemtry system offline\n";
     return EXIT_SUCCESS;
 }
