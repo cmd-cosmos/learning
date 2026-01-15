@@ -86,5 +86,20 @@ static const char* radar_state_str(void)
 
 int main(void)
 {
+    uint32_t tick;
+    bool target_detected;
+
+    bool radar_returns[10] = {
+        false, false, true, true, true, true, false, true, true, false
+    };
+
+    for (tick = 0U; tick < 10U; tick++)
+    {
+        target_detected = radar_returns[tick];
+        radar_update(target_detected);
+
+        printf("TICK: %u | TARGET: %4s | STATE: %s\n", tick, target_detected ? "YES" : "NO", radar_state_str());
+    }
+
     return 0;
 }
