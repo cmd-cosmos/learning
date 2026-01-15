@@ -20,46 +20,68 @@ static void radar_update(bool target_detected)
 {
     switch (radar_state)
     {
-    case RADAR_STATE_SEARCH:
-        if (target_detected == true)
-        {
-            radar_state = RADAR_STATE_TRACK;
-            lock_timer = 0U;
-        }
-        break;
-    case RADAR_STATE_TRACK:
-        if (target_detected == true)
-        {
-            lock_timer++;
-            if (lock_timer >= LOCK_CONFIRM_TICKS)
+        case RADAR_STATE_SEARCH:
+            if (target_detected == true)
             {
-                radar_state = RADAR_STATE_LOCK;
-                loss_timer  = 0U;
+                radar_state = RADAR_STATE_TRACK;
+                lock_timer = 0U;
             }
-        }
-        else
-        {
-            radar_state = RADAR_STATE_SEARCH;
-        }
-        break;
-    case RADAR_STATE_LOCK:
-        if (target_detected == false)
-        {
-            loss_timer++;
-            if (loss_timer >= LOCK_LOSS_TICKS)
+            break;
+        case RADAR_STATE_TRACK:
+            if (target_detected == true)
+            {
+                lock_timer++;
+                if (lock_timer >= LOCK_CONFIRM_TICKS)
+                {
+                    radar_state = RADAR_STATE_LOCK;
+                    loss_timer  = 0U;
+                }
+            }
+            else
             {
                 radar_state = RADAR_STATE_SEARCH;
             }
-        }
-        else
-        {
-            loss_timer = 0U;
-        }
-        break;
-    default:
-        radar_state = RADAR_STATE_SEARCH;
-        break;
+            break;
+        case RADAR_STATE_LOCK:
+            if (target_detected == false)
+            {
+                loss_timer++;
+                if (loss_timer >= LOCK_LOSS_TICKS)
+                {
+                    radar_state = RADAR_STATE_SEARCH;
+                }
+            }
+            else
+            {
+                loss_timer = 0U;
+            }
+            break;
+        default:
+            radar_state = RADAR_STATE_SEARCH;
+            break;
     }
+}
+
+static const char* radar_state_str(void)
+{
+    const char* str;
+
+    switch (radar_state)
+    {
+        case RADAR_STATE_SEARCH:
+            str = "SEARCH";
+            break;
+        case RADAR_STATE_TRACK:
+            str = "TRACK";
+            break;
+        case RADAR_STATE_LOCK:
+            str = "LOCK";
+            break;
+        default:
+            str = "UNKNOWN";
+            break;
+    }
+    return str;
 }
 
 int main(void)
