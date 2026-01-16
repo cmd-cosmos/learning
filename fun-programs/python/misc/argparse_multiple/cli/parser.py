@@ -2,6 +2,7 @@
 
 import argparse
 from cli.math_subcommands import register_math_cmd
+from cli.file_cmds import register_file_cmd
 
 def create_parser():
     parser = argparse.ArgumentParser(prog = "CLIproj",
@@ -16,6 +17,7 @@ def create_parser():
     )
 
     register_math_cmd(subparsers=subparsers)
+    register_file_cmd(subparsers=subparsers)
 
     return parser
 
