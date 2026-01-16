@@ -1,6 +1,7 @@
 # pylint: skip-file
 
 import argparse
+from cli.math_subcommands import register_math_cmd
 
 def create_parser():
     parser = argparse.ArgumentParser(prog = "CLIproj",
@@ -13,6 +14,8 @@ def create_parser():
         title="commands",
         dest="command"
     )
+
+    register_math_cmd(subparsers=subparsers)
 
     return parser
 
