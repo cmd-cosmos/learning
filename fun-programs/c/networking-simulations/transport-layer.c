@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <windows.h>
 
@@ -22,7 +23,6 @@ typedef struct
     uint16_t padding;
 }segment_header_t;
 
-
 /**
  * @brief UDP datagram header format 
  * 
@@ -37,28 +37,29 @@ typedef struct
 
 typedef struct
 {
-
-}segment_t;
-
-typedef struct
-{
-
-}datagram_t;
-
+    uint32_t id;
+    uint32_t sequence;
+    uint16_t length;
+    uint8_t  data[MAX_DATA_SIZE];
+}pdu_t;
 
 typedef struct
 {
-
+    uint32_t received;
+    uint32_t dropped;
 }udp_t;
 
 typedef struct
 {
-
+    uint32_t expectedSeq;
+    uint32_t received;
+    uint32_t dropped;
 }tcp_t;
 
-typedef enum mode{
-    UDP, // 0
-    TCP  // 1
+typedef enum 
+{
+    MODE_UDP=0, // 0
+    MODE_TCP  // 1
 } mode_t;
 
 int main(void)
