@@ -3,6 +3,16 @@
 
 #define MAX_PDU_PER_TRANSPORT 1000
 
+typedef struct 
+{
+    
+}segment_header_t;
+
+typedef struct 
+{
+    
+}datagram_header_t;
+
 typedef struct
 {
 
