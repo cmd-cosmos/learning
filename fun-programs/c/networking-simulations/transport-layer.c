@@ -64,8 +64,16 @@ typedef enum
 
 int main(void)
 {
-    int numPDU      = MAX_PDU_PER_TRANSPORT - 1000;
-    mode_t protocol = 0;
+    int selectedProtocol = MessageBox(NULL, "Transport Layer Protocol Selection", "TCP - YES, UDP - NO", MB_YESNO);
+    if (selectedProtocol == IDYES)
+    {
+        puts("TCP Selected");
+    }
+    else if (selectedProtocol == IDNO)
+    {
+        puts("UDP Selected");
+    }
+    
 
     return EXIT_SUCCESS;
 }
