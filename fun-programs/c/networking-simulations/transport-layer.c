@@ -80,14 +80,16 @@ void udp_transport(void)
         {
             udpStats.dropped++;
             printf("[UDP] PDU %u DROPPED\n", i);
+            Sleep(300);
         }
         else
         {
             udpStats.received++;
             printf("[UDP] PDU %u RECEIVED\n", i);
+            Sleep(300);
         }
     }
-
+    Sleep(2000);
     puts("\nUDP Results: ");
     printf("Received: %u\n", udpStats.received);
     printf("Dropped:  %u\n", udpStats.dropped);
@@ -105,7 +107,8 @@ void tcp_transport(void)
         if (packet_drop())
         {
             tcpStats.dropped++;
-            printf("[TCP] PDU %u LOSt -> Retransmission Required\n", seq);
+            printf("[TCP] PDU %u LOST -> Retransmission Required\n", seq);
+            Sleep(300);
             continue;
         }
         if (seq == tcpStats.expectedSeq)
@@ -113,13 +116,16 @@ void tcp_transport(void)
             tcpStats.received++;
             tcpStats.expectedSeq++;
             printf("[TCP] PDU %u RECEIVED (IN ORDER)\n", seq);
+            Sleep(300);
         }
         else
         {
             tcpStats.dropped++;
             printf("[TCP] PDU %u OUT OF ORDER (expected %u)\n", seq, tcpStats.expectedSeq);
+            Sleep(300);
         }
     }
+    Sleep(2000);
     puts("\nTCP Results: ");
     printf("Received: %u\n", tcpStats.received);
     printf("Dropped:  %u\n", tcpStats.dropped);
@@ -127,16 +133,20 @@ void tcp_transport(void)
 
 int main(void)
 {
-    int selectedProtocol = MessageBox(NULL, "Transport Layer Protocol Selection", "TCP - YES, UDP - NO", MB_YESNO);
+    srand((unsigned int)time(NULL));
+
+    int selectedProtocol = MessageBox(NULL, "TCP - YES, UDP - NO", "Transport Layer Protocol Selection", MB_YESNO);
+
     if (selectedProtocol == IDYES)
     {
         puts("TCP Selected");
+        tcp_transport();
     }
     else if (selectedProtocol == IDNO)
     {
         puts("UDP Selected");
+        udp_transport();
     }
-    
 
     return EXIT_SUCCESS;
 }
