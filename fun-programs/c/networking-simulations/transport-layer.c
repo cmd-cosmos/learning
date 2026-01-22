@@ -72,7 +72,7 @@ int packet_drop(void)
 void udp_transport(void)
 {
     udp_t udpStats = {0};
-    puts("---- UDP Transmission ----");
+    puts("\n---- UDP Transmission ----");
     
     for (uint32_t i = 0; i < MAX_PDU_PER_TRANSPORT; i++)
     {
@@ -91,6 +91,38 @@ void udp_transport(void)
     puts("\nUDP Results: ");
     printf("Received: %u\n", udpStats.received);
     printf("Dropped:  %u\n", udpStats.dropped);
+}
+
+void tcp_transport(void)
+{
+    tcp_t tcpStats = {0};
+    tcpStats.expectedSeq = 0;
+
+    puts("\n---- TCP Transmission ----");
+
+    for (uint32_t seq = 0; seq < MAX_PDU_PER_TRANSPORT; seq++)
+    {
+        if (packet_drop())
+        {
+            tcpStats.dropped++;
+            printf("[TCP] PDU %u LOSt -> Retransmission Required\n", seq);
+            continue;
+        }
+        if (seq == tcpStats.expectedSeq)
+        {
+            tcpStats.received++;
+            tcpStats.expectedSeq++;
+            printf("[TCP] PDU %u RECEIVED (IN ORDER)\n", seq);
+        }
+        else
+        {
+            tcpStats.dropped++;
+            printf("[TCP] PDU %u OUT OF ORDER (expected %u)\n", seq, tcpStats.expectedSeq);
+        }
+    }
+    puts("\nTCP Results: ");
+    printf("Received: %u\n", tcpStats.received);
+    printf("Dropped:  %u\n", tcpStats.dropped);
 }
 
 int main(void)
