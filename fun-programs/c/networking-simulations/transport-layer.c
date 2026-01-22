@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <time.h>
 #include <windows.h>
 
 #define MAX_PDU_PER_TRANSPORT 1000
 #define MAX_DATA_SIZE         1460 // bytes
+#define PACKET_LOSS_RATE      10   // % loss in UDP transport
 
 
 /**
@@ -61,6 +63,35 @@ typedef enum
     MODE_UDP=0, // 0
     MODE_TCP  // 1
 } mode_t;
+
+int packet_drop(void)
+{
+    return (rand() % 100) < PACKET_LOSS_RATE;
+}
+
+void udp_transport(void)
+{
+    udp_t udpStats = {0};
+    puts("---- UDP Transmission ----");
+    
+    for (uint32_t i = 0; i < MAX_PDU_PER_TRANSPORT; i++)
+    {
+        if (packet_drop())
+        {
+            udpStats.dropped++;
+            printf("[UDP] PDU %u DROPPED\n", i);
+        }
+        else
+        {
+            udpStats.received++;
+            printf("[UDP] PDU %u RECEIVED\n", i);
+        }
+    }
+
+    puts("\nUDP Results: ");
+    printf("Received: %u\n", udpStats.received);
+    printf("Dropped:  %u\n", udpStats.dropped);
+}
 
 int main(void)
 {
