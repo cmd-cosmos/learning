@@ -18,6 +18,13 @@ def login():
         return f"Username: {username} | Password: {password}"
     else:
         return render_template('login.html')
+    
+@app.route("/get")
+def serve():
+    return {
+        1 : "Batman",
+        2 : "Superman"
+    }
 
 if __name__ == "__main__":
     app.run()
