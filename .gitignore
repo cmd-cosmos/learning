@@ -49,3 +49,7 @@ obj/
 # NuGet packages
 *.nupkg
 packages/
+
+# env vars
+.env
+.env.*
