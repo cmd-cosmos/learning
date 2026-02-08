@@ -1,0 +1,22 @@
+AI & ML 20 Projects List
+
+• Dynamic Pricing Strategy
+• Smart Loan Recovery System
+• Geospatial Clustering
+• Fashion Recommendation System
+• Building a Diffusion Model from Scratch
+• Image Generation using Diffusion Models
+• Building Synthetic Medical Records using GANs
+• Search Queries Anomaly Detection
+• Credit Scoring & Segmentation
+• App User Segmentation
+• Consumer Complaint Classification
+• End-to-End Predictive Model
+• Build a Live Machine Learning Application
+• YouTube Video Chaptering
+• End-to-End Chatbot
+• Text Completion using Fine-Tuned LLMs
+• Document Analysis using LLMs
+• Building a RAG Pipeline for LLMs
+• Data Augmentation using LLMs
+• Building an AI Agent using OpenAI API
