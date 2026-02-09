@@ -39,4 +39,11 @@ def launch_control():
             print("[LC] Abort at ignition")
             return
     print("[LC] Ignition")
-    time.sleep(1)
+    time.sleep(2)
+
+    with lock:
+        if abort:
+            print("[LC] Engine Anomaly - Liftoff Aborted")
+        else:
+            print("[LC] Liftoff")
+
