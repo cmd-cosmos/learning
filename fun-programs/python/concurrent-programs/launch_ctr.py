@@ -47,3 +47,17 @@ def launch_control():
         else:
             print("[LC] Liftoff")
 
+def main():
+    engine_thread = threading.Thread(target=engine_monitor, name="EngineMonitor")
+    launch_thread = threading.Thread(target=launch_control, name="LaunchControl")
+
+    engine_thread.start()
+    launch_thread.start()
+
+    engine_thread.join()
+    launch_thread.join()
+
+    print("[SYS] Shutdown Complete")
+
+if __name__ == "__main__":
+    main()
