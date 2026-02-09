@@ -33,4 +33,10 @@ def launch_control():
                 return
         print(f"[LC] t-{i:2} seconds")
         time.sleep(1)
-        
+    
+    with lock:
+        if abort:
+            print("[LC] Abort at ignition")
+            return
+    print("[LC] Ignition")
+    time.sleep(1)
