@@ -22,3 +22,15 @@ def engine_monitor():
 
             return
 
+def launch_control():
+    global abort
+    print("[LC] Launch Control --- Online")
+
+    for i in range(10, 0, -1):
+        with lock:
+            if abort:
+                print("[LC] Count Aborted")
+                return
+        print(f"[LC] t-{i:2} seconds")
+        time.sleep(1)
+        
