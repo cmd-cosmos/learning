@@ -27,4 +27,14 @@ void launch_control()
 
     cv.wait(lock, [] { return engine_ready; });
     std::cout << "[LC] Engine Ready - Ignition Seq\n";
+
+}
+
+int main()
+{
+    std::thread engine(engine_chill);
+    std::thread lc(launch_control);
+
+    engine.join();
+    lc.join();
 }
