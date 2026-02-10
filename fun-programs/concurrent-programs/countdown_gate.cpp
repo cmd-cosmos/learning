@@ -19,3 +19,12 @@ void engine_chill()
     std::cout << "[ENGINE] Chilldown Complete\n";
     cv.notify_one();
 }
+
+void launch_control()
+{
+    std::unique_lock<std::mutex> lock(mtx);
+    std::cout << "[LC] Waiting for Engine Ready\n";
+
+    cv.wait(lock, [] { return engine_ready; });
+    std::cout << "[LC] Engine Ready - Ignition Seq\n";
+}
