@@ -1,5 +1,3 @@
-package tutorials.java.misc_revision.practice;
-
 // basic CLI based calculator
 import java.util.Scanner;
 
@@ -16,8 +14,16 @@ public class Calculator
         {
             System.out.println("OP ID: " + i + " --> " + operations_list[i]);
         }
-        System.out.print("Choose Operation ID: ");
-        int op_id = scanner.nextInt();
+        try
+        {
+            System.out.print("Choose Operation ID: ");
+            int op_id = scanner.nextInt();
+            System.out.println("\nSelected OP ID | " + op_id + " | " + operations_list[op_id] + '\n');
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+        }
         
         scanner.close();
     }
