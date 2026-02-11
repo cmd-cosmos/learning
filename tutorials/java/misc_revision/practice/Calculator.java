@@ -1,8 +1,11 @@
+package tutorials.java.misc_revision.practice;
+
 // basic CLI based calculator
 import java.util.Scanner;
 
 public class Calculator
 {
+    @SuppressWarnings("unused")
     public static void main(String args[])
     {
         Scanner scanner = new Scanner(System.in);
@@ -15,6 +18,7 @@ public class Calculator
         }
         System.out.print("Choose Operation ID: ");
         int op_id = scanner.nextInt();
-
+        
+        scanner.close();
     }
 }
