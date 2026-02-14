@@ -13,5 +13,8 @@ int main()
     int global_val = 6000;
     printf("modified global val: %d\n", global_val);
 
+    // hidden val from math_utils.c is inaccessble here
+    // printf("hidden val: %d\n", hidden);
+
     return 0;
 }
