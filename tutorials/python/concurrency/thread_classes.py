@@ -22,6 +22,7 @@ class Joker(Thread):
         for i in range(5):
             print(i, " I am Joker")
 
+# inheritence based worker class
 class Worker(Thread):
     def __init__(self, name, delay):
         super().__init__()
@@ -32,6 +33,23 @@ class Worker(Thread):
         print(f"{self.name} starting")
         time.sleep(self.delay)
         print(f"{self.name} finished")
+
+class WorkerComposition:
+    def __init__(self, name, delay) -> None:
+        self.name = name
+        self.delay = delay
+        self.thread = Thread(target=self.run)
+    
+    def run(self):
+        print(f"{self.name} starting")
+        time.sleep(self.delay)
+        print(f"{self.name} finished")
+    
+    def start(self):
+        self.thread.start()
+
+    def join(self):
+        self.thread.join()
 
 if __name__ == "__main__":
     batman = Batman()
@@ -59,4 +77,16 @@ if __name__ == "__main__":
     t1.join()
     t2.join()
 
-    print("\nDone")
+    print("\nDone\n\n")
+
+    tc1 = WorkerComposition("composition-thread-1", 5)
+    tc2 = WorkerComposition("composition-thread-2", 2)
+    tc3 = WorkerComposition("composition-thread-3", 3)
+
+    tc1.start()
+    tc2.start()
+    tc3.start()
+    
+    tc1.join()
+    tc2.join()
+    tc3.join()
