@@ -1,4 +1,5 @@
 # pylint: skip-file
+import time
 from threading import Thread
 
 class Batman(Thread):
@@ -21,6 +22,17 @@ class Joker(Thread):
         for i in range(5):
             print(i, " I am Joker")
 
+class Worker(Thread):
+    def __init__(self, name, delay):
+        super().__init__()
+        self.name = name
+        self.delay = delay
+    
+    def run(self):
+        print(f"{self.name} starting")
+        time.sleep(self.delay)
+        print(f"{self.name} finished")
+
 if __name__ == "__main__":
     batman = Batman()
     joker = Joker()
@@ -33,5 +45,18 @@ if __name__ == "__main__":
     batman.start()
     joker.start()
 
-    # batman.join()
-    # joker.join()
+    batman.join()
+    joker.join()
+
+    print("\n\n")
+
+    t1 = Worker("Thread-1", 3)
+    t2 = Worker("Thread-2", 2)
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+    print("\nDone")
