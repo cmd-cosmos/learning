@@ -6,6 +6,7 @@
 
 ### python ignores
 __pycache__/
+*.prof
 
 
 ### java ignores
