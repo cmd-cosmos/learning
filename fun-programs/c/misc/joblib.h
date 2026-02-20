@@ -1,0 +1,21 @@
+#ifndef JOBLIB_H
+#define JOBLIB_H
+#include <stdint.h>
+
+typedef enum {
+    LOW,
+    MEDIUM,
+    HIGH,
+    CRITICAL
+}priority_t;
+
+typedef struct job_t;
+
+typedef struct {
+    uint32_t id;
+    priority_t priority;
+    job_t* before;
+    job_t* after;
+}job_t;
+
+#endif
