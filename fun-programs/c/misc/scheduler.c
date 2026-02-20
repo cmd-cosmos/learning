@@ -33,7 +33,30 @@ void scheduler_enqueue(scheduler_t* scheduler, job_t* job)
 
 job_t* scheduler_dequeue(scheduler_t* scheduler)
 {
-    
+    for (int priority = CRITICAL; priority >= LOW; priority--)
+    {
+        queue_t* q = &scheduler->queue[priority];
+
+        if (q->head != NULL)
+        {
+            job_t* job = q->head;
+            q->head = job->after;
+
+            if (q->head != NULL)
+            {
+                q->head->before = NULL;
+            }
+            else
+            {
+                q->tail = NULL;
+            }
+            job->after = NULL;
+            job->before = NULL;
+
+            return job;
+        }
+    }
+    return NULL;
 }
 
 int main(void)
