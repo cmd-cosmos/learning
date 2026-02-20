@@ -59,6 +59,19 @@ job_t* scheduler_dequeue(scheduler_t* scheduler)
     return NULL;
 }
 
+job_t* create_job(uint32_t id, priority_t priority)
+{
+    job_t* job = malloc(sizeof(job_t));
+    if (!job)
+        return NULL;
+    job->id = id;
+    job->priority = priority;
+    job->before = NULL;
+    job->after = NULL;
+
+    return job;
+}
+
 int main(void)
 {
     return 0;
