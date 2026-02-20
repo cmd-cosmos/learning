@@ -11,11 +11,11 @@ typedef enum {
 
 typedef struct job job_t;
 
-struct {
+struct job{
     uint32_t id;
     priority_t priority;
     job_t* before;
     job_t* after;
-}job;
+};
 
 #endif
