@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <string.h>
 
 typedef struct {
@@ -13,6 +14,14 @@ typedef struct
     char* name;
     uint32_t age;
 } student_t;
+
+typedef struct
+{
+    char a;
+    int b;
+    char c;
+}low_level_t;
+
 
 int main(void)
 {
@@ -35,6 +44,11 @@ int main(void)
 
     printf("student name: %s\n", s2->name);
     printf("student age: %d\n", s2->age);
+
+    printf("offset a = %zu\n", offsetof(low_level_t, a));
+    printf("offset b = %zu\n", offsetof(low_level_t, b));
+    printf("offset c = %zu\n", offsetof(low_level_t, c));
+    printf("sizeof struct = %zu\n", sizeof(low_level_t));
 
     return 0;
 }
