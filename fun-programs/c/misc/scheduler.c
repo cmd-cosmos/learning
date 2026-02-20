@@ -59,6 +59,23 @@ job_t* scheduler_dequeue(scheduler_t* scheduler)
     return NULL;
 }
 
+const char* priority_to_string(priority_t priority)
+{
+    switch (priority)
+    {
+    case LOW:
+        return "LOW";
+    case MEDIUM:
+        return "MEDIUM";   
+    case HIGH:
+        return "HIGH";
+    case CRITICAL:
+        return "CRITICAL";  
+    default:
+        return "NULL";
+    }
+}
+
 job_t* create_job(uint32_t id, priority_t priority)
 {
     job_t* job = malloc(sizeof(job_t));
