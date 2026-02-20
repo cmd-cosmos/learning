@@ -91,5 +91,35 @@ job_t* create_job(uint32_t id, priority_t priority)
 
 int main(void)
 {
+    scheduler_t scheduler;
+    scheduler_init(&scheduler);
+
+    job_t* job1 = create_job(1, MEDIUM);
+    job_t* job2 = create_job(2, LOW);
+    job_t* job3 = create_job(3, CRITICAL);
+    job_t* job4 = create_job(4, HIGH);
+    job_t* job5 = create_job(5, CRITICAL);
+    job_t* job6 = create_job(6, LOW);
+    job_t* job7 = create_job(7, HIGH);
+    job_t* job8 = create_job(8, MEDIUM);
+
+    scheduler_enqueue(&scheduler, job1);
+    scheduler_enqueue(&scheduler, job2);
+    scheduler_enqueue(&scheduler, job3);
+    scheduler_enqueue(&scheduler, job4);
+    scheduler_enqueue(&scheduler, job5);
+    scheduler_enqueue(&scheduler, job6);
+    scheduler_enqueue(&scheduler, job7);
+    scheduler_enqueue(&scheduler, job8);
+
+    puts("DISPATCH ORDER: \n");
+
+    job_t* job;
+    while((job = scheduler_dequeue(&scheduler)) != NULL)
+    {
+        printf("RUNNING JOB ID: %2u | PRIORITY: %10s\n", job->id, priority_to_string(job->priority));
+        free(job);
+    }
+
     return 0;
 }
