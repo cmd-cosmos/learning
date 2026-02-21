@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+typedef struct 
+{
+    int x;
+    int y;
+} vector_t;
+
 int main(void)
 {
     int x = 100;
@@ -21,6 +27,10 @@ int main(void)
     printf("ptr_ptr address: %p\n", (void*)&ptr_ptr);
     printf("ptr_ptr points to: %p\n", (void*)ptr_ptr);
 
+    vector_t vec;
+    *(&vec.x) = 1;
+    *(&vec.y) = 4;
+    printf("vec: %d,%d", *(&vec.x), *(&vec.y));
 
     return 0;
 }
