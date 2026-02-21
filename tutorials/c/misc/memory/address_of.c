@@ -10,7 +10,8 @@ int main(void)
 
     // printing addr of the var - alternate
     // when printing addresses using the %p specifier --> it is recommended to cast to (void*) as the %p specifier expects a void ptr
-    printf("addr of y: 0x%o\n", (void*)&y);
+    printf("addr of y: 0x%p\n", &y);
+    printf("addr of y: 0x%p\n", (void*)&y);
 
     return 0;
 }
