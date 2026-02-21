@@ -13,5 +13,14 @@ int main(void)
     printf("addr of y: 0x%p\n", &y);
     printf("addr of y: 0x%p\n", (void*)&y);
 
+    int num = 7;
+    int* ptr = &num;
+    int** ptr_ptr = &ptr;
+
+    printf("ptr address: %p\n", (void*)&ptr);
+    printf("ptr_ptr address: %p\n", (void*)&ptr_ptr);
+    printf("ptr_ptr points to: %p\n", (void*)ptr_ptr);
+
+
     return 0;
 }
