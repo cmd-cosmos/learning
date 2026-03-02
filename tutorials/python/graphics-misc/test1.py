@@ -1,6 +1,7 @@
 #pylint: skip-file
 import pygame
 import sys
+import random
 
 pygame.init()
 pygame.display.set_caption("Test Window")
@@ -13,3 +14,5 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        screen.fill((random.randint(0,255), random.randint(0,255), random.randint(0,255)))
+        pygame.display.update()
