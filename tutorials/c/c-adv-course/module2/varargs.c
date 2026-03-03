@@ -18,5 +18,6 @@ int sum(int count, ...)
 
 int main()
 {
+    printf("sum: %d\n", sum(4, 10,20,30,40));
     return 0;
 }
