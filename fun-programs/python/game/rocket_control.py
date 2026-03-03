@@ -1,4 +1,6 @@
 #pylint: skip-file
+#type: ignore
+
 import pygame
 import sys
 from pygame.locals import *
