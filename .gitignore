@@ -54,3 +54,5 @@ packages/
 # env vars
 .env
 .env.*
+
+tutorials/c/c-adv-course/module3/test.txt
