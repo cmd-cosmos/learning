@@ -37,5 +37,16 @@ int main(void)
         pthread_create(&writers[i], NULL, writer, (void*)i);
     }
 
+    for (long i = 0; i < 3; i++) 
+    {
+        pthread_join(readers[i], NULL);
+    }
+
+    for (long i = 0; i < 2; i++) 
+    {
+        pthread_join(writers[i], NULL);
+    }
+
+    pthread_rwlock_destroy(&rwlock);
     return 0;
 }
