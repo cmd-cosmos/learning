@@ -25,5 +25,17 @@ void* writer(void* arg)
 
 int main(void)
 {
+    pthread_t readers[3], writers[2];
+
+    for (long i = 0; i < 3; i++)
+    {
+        pthread_create(&readers[i], NULL, reader, (void*)i);
+    }
+    
+    for (long i = 0; i < 2; i++)
+    {
+        pthread_create(&writers[i], NULL, writer, (void*)i);
+    }
+
     return 0;
 }
