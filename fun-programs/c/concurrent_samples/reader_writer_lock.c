@@ -14,6 +14,15 @@ void* reader(void* arg)
     return NULL;
 }
 
+void* writer(void* arg)
+{
+    pthread_rwlock_wrlock(&rwlock);
+    printf("Writer %ld is writing to the shared resource\n", (long)arg);
+    sleep(2);
+    printf("Writer %ld finished writing to the shared resource\n", (long)arg);
+    return NULL;
+}
+
 int main(void)
 {
     return 0;
