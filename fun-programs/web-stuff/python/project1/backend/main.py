@@ -3,8 +3,13 @@
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Form(BaseModel):
+    id : int
+    name : str
 
 @app.get("/")
 def root():
@@ -21,6 +26,17 @@ def homepage():
         </head>
         <body>
             <h>Home Page</h>
+            <p>This is a home page/landing page</p>
         </body>
     </html>
 """
+
+@app.post("/form")
+async def submit_form(formData : Form):
+    uid = formData.id
+    uname = formData.name
+    return {
+        "msg" : "user registered",
+        "user id" : uid,
+        "user name" : uname,
+    }
