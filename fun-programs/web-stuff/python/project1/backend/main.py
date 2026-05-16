@@ -38,7 +38,10 @@ def homepage():
 async def submit_form(formData : Form):
     uid = formData.id
     uname = formData.name
-    users.append(tuple(uid, uname))
+    users.append({
+        "id" : uid,
+        "name" : uname
+    })
     return {
         "msg" : "user registered",
         "user id" : uid,
@@ -50,6 +53,6 @@ def get_users(uid):
     uid = int(uid)
     return {
         "msg" : f"retrieving user with id {uid}",
-        "user id" : users[uid][0], 
-        "user id" : users[uid][1], 
+        "user id" : users[uid]["id"], 
+        "user name" : users[uid]["name"], 
     }
