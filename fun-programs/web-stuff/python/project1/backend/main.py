@@ -60,3 +60,9 @@ def get_users(uid):
     return {
         "error" : "user not found"
     }
+
+@app.get("/user_list")
+def user_list():
+    return {
+        "users" : users
+    }
