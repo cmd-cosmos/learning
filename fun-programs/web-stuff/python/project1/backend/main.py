@@ -7,6 +7,9 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+# simulating a database
+users = []
+
 class Form(BaseModel):
     id : int
     name : str
@@ -35,8 +38,18 @@ def homepage():
 async def submit_form(formData : Form):
     uid = formData.id
     uname = formData.name
+    users.append(tuple(uid, uname))
     return {
         "msg" : "user registered",
         "user id" : uid,
         "user name" : uname,
+    }
+
+@app.get("/users/{uid}")
+def get_users(uid):
+    uid = int(uid)
+    return {
+        "msg" : f"retrieving user with id {uid}",
+        "user id" : users[uid][0], 
+        "user id" : users[uid][1], 
     }
