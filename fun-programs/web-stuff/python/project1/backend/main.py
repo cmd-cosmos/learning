@@ -51,8 +51,12 @@ async def submit_form(formData : Form):
 @app.get("/users/{uid}")
 def get_users(uid):
     uid = int(uid)
+    for user in users:
+        if user["id"] == uid:
+            return {
+                "msg" : f"retrieving user with id {uid}",
+                "user" : user  
+            }
     return {
-        "msg" : f"retrieving user with id {uid}",
-        "user id" : users[uid]["id"], 
-        "user name" : users[uid]["name"], 
+        "error" : "user not found"
     }
