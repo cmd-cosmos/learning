@@ -11,3 +11,7 @@ def root():
     return {
         "message" : "backend active"
     }
+
+@app.post("/users")
+def add_users():
+    pass
