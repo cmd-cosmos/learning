@@ -6,6 +6,10 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+class User(BaseModel):
+    id : int
+    name : str
+
 @app.get("/")
 def root():
     return {
@@ -13,5 +17,5 @@ def root():
     }
 
 @app.post("/users")
-def add_users():
+def add_users(user : User):
     pass
