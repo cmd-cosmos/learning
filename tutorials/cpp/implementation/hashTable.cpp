@@ -17,6 +17,18 @@ class HashTable {
         void printTable();
 };
 
+bool HashTable::isEmpty() const {
+    int sum{};
+    for (int i{}; i < hashGroups; i++)
+    {
+        sum += table[i].size();
+    }
+    if (!sum)
+    {
+        return true;
+    } return false;
+}
+
 int main()
 {
 
