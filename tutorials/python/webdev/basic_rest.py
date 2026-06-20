@@ -1,17 +1,33 @@
 #pylint: skip-file
 #type: ignore
 
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
-from flask import Flask, jsonify
+app = FastAPI(
+    title="Basic REST",
+    version= "0.1.0"
+)
 
-app = Flask(__name__)
+class User(BaseModel):
+    id : int
+    name : str
+    
 
-@app.route("/api/help", methods=["GET"])
-def hello():
-    return jsonify({
-        "message" : "REST API",
-        "status" : "success"
-    })
+users = []
 
-if __name__ == "__main__":
-    app.run(port=8080)
+@app.get("/")
+def root():
+    return {
+        "status" : 0,
+        "message" : "backend active"
+    }
+
+    
+@app.post("/form")
+def form_val(user: User):
+    users.append(user)
+    return {
+        "status" : 0,
+        "user" : user
+    }
