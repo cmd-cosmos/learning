@@ -23,11 +23,17 @@ def root():
         "message" : "backend active"
     }
 
-    
 @app.post("/user")
 def add_user(user: User):
     users.append(user)
     return {
         "status" : 0,
         "message" : "added user: %s" %user
+    }
+
+@app.get("/user")
+def get_all_users():
+    return {
+        "status" : 0,
+        "result" : users 
     }
