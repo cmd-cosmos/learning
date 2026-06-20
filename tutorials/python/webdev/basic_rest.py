@@ -24,10 +24,10 @@ def root():
     }
 
     
-@app.post("/form")
-def form_val(user: User):
+@app.post("/user")
+def add_user(user: User):
     users.append(user)
     return {
         "status" : 0,
-        "user" : user
+        "message" : "added user: %s" %user
     }
