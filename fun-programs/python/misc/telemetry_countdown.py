@@ -12,7 +12,7 @@ logging.basicConfig(
 )
 
 with Progress() as progress:
-    task_1 = progress.add_task("[red]○ Initializing Flight Control Computers...", total=1000)
+    task_1 = progress.add_task("[red]○ Initializing Flight Control Computers...", total=700)
     task_2 = progress.add_task("[red]○ Establishing Communication Links...", total=1000)
     task_3 = progress.add_task("[red]○ Activating Flight Control Panel...", total=1000)
     task_4 = progress.add_task("[red]○ Calibrating Navigation Systems...", total=1000)
@@ -26,7 +26,7 @@ with Progress() as progress:
     task_12 = progress.add_task("[red]○ Loading Live Telemetry Stream...", total=12000)
     
     while not progress.finished:
-        progress.update(task_id=task_1  , advance=0.5)
+        progress.update(task_id=task_1  , advance=0.9)
         progress.update(task_id=task_2  , advance=0.5)
         progress.update(task_id=task_3  , advance=0.4)
         progress.update(task_id=task_4  , advance=0.4)
@@ -42,6 +42,6 @@ with Progress() as progress:
         for task in progress.tasks:
             desc = task.description
             if task.finished and not desc.startswith("[green]"):
-                progress.update(task.id, description=desc.replace("[red]○", "[green]✓"))
+                progress.update(task.id, description=desc.replace("[red]○", "[green]✅"))
     
         time.sleep(0.1)
