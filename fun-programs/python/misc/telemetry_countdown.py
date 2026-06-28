@@ -4,12 +4,18 @@ import time
 import random
 import logging
 from rich.progress import Progress
-from rich.console import Console
 
 logging.basicConfig(
     level=logging.DEBUG,
     format="[%(levelname)s] %(message)s"
 )
+
+def file_reader():
+    with open("sample_telemetry.txt", "r") as f:
+        data = f.readlines()
+    
+    clean_data = [line.strip() for line in data]
+    return clean_data
 
 with Progress() as progress:
     task_1 = progress.add_task("[red]○ Initializing Flight Control Computers...", total=700)
@@ -45,3 +51,12 @@ with Progress() as progress:
                 progress.update(task.id, description=desc.replace("[red]○", "[green]✅"))
     
         time.sleep(0.1)
+    
+if progress.finished:
+    clean_data = file_reader()
+    for line in clean_data:
+        sleep_time = random.uniform(1.00,3.00)
+        time.sleep(sleep_time)
+        print(f"Telemetry retrieval latency: {sleep_time} s") if sleep_time <= 1.33 else logging.critical(f"Telemetry retrieval latency breach : {sleep_time} s")
+        logging.info(f"[TELEMETRY FEED] {line}")
+            
