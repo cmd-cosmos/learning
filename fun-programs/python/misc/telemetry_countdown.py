@@ -4,7 +4,9 @@ import time
 import random
 import logging
 from rich.progress import Progress
+from colorama import Style, Fore, Back, init
 
+init()
 logging.basicConfig(
     level=logging.DEBUG,
     format="[%(levelname)s] %(message)s"
@@ -57,6 +59,6 @@ if progress.finished:
     for line in clean_data:
         sleep_time = random.uniform(1.00,3.00)
         time.sleep(sleep_time)
-        print(f"Telemetry retrieval latency: {sleep_time} s") if sleep_time <= 1.33 else logging.critical(f"Telemetry retrieval latency breach : {sleep_time} s")
-        logging.info(f"[TELEMETRY FEED] {line}")
+        logging.warning(Fore.YELLOW + f"Telemetry retrieval latency: {sleep_time} s" + Style.RESET_ALL) if sleep_time <= 1.33 else logging.critical(Fore.RED + f"Telemetry retrieval latency breach : {sleep_time} s" + Style.RESET_ALL)
+        print(Back.LIGHTGREEN_EX + f"[TELEMETRY FEED] {line}" + Style.RESET_ALL)
             
