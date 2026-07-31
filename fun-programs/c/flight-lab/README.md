@@ -62,7 +62,7 @@
 
 ---
 
-# Repository Structure
+# Target Repository Structure
 
 ```text
 flight-lab/
