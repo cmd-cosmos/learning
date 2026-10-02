@@ -22,6 +22,8 @@ patterns:
 #define FLAG_LIFTOFF        (1U << 2) // 0000 0100
 #define FLAG_STAGE_SEP      (1U << 3) // 0000 1000
 #define FLAG_LAND_BURN      (1U << 4) // 0001 0000
+#define FLAG_FUEL_LOW       (1U << 5) // 0010 0000
+#define FLAG_COMMS_LOST     (1U << 6) // 0100 0000
 #define FLAG_FAULT          (1U << 7) // 1000 0000
 
 // shifting by x bits  -> x 0s after the '1' bit
@@ -48,6 +50,9 @@ int main(void) {
 
     status ^= FLAG_FAULT; // toggle new bit
     printf("after fault toggle: "); print_bits(status); putchar('\n');
+
+    status |= FLAG_COMMS_LOST;
+    printf("after comms lost: "); print_bits(status); putchar('\n');
 
     return 0;
 }
